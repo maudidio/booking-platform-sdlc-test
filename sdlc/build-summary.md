@@ -1,27 +1,27 @@
 # Build summary
 
 ## Summary
-Added an English/Italian language selector. A native `<select>` (`LanguageSwitcher`) in the header calls the `setLanguageAction` server action. The action validates the locale and stores it in a `lang` cookie. The root layout reads the cookie through `getLocale()`, sets `<html lang>`, and passes dictionary slices to Navbar and Footer. The account layout and GuestDropdown use the same dictionaries. Dictionaries are plain editable files, `en.js` and `it.js`, with identical keys. English output is unchanged by default. Invalid locales return `{ok:false, error}` and leave the cookie untouched.
+Added an English/Italian language selector. The header, rendered by the root layout, has a native `<select>` that calls the `setLanguageAction` server action. The action validates the locale and stores it in the `lang` cookie, then the client calls `router.refresh()`. Dictionaries live in editable `en.js` and `it.js` files with identical key sets. The root layout resolves the locale (default `en`), sets `<html lang>`, and passes dictionary slices to Navbar and Footer. The account layout and GuestDropdown also use dictionary strings. English output is unchanged.
 
 ## Files changed
-| File | Action | Description |
+| file | action | description |
 |---|---|---|
-| app/_lib/i18n/config.js | create | Locales, default, cookie name, labels, `isSupportedLocale` |
-| app/_lib/i18n/dictionaries/en.js | create | English dictionary |
-| app/_lib/i18n/dictionaries/it.js | create | Italian dictionary, same keys |
-| app/_lib/i18n/dictionaries/index.js | create | Aggregates dictionaries |
-| app/_lib/i18n/index.js | create | `resolveLocale`, `getLocale`, `getDictionary` |
-| app/_lib/i18n/actions.js | create | `setLanguageAction` server action |
-| app/_ui/LanguageSwitcher/index.jsx | create | Client drop-down |
-| app/_ui/LanguageSwitcher/styles.module.css | create | Styles |
-| app/_ui/Navbar.jsx | modify | Dictionary labels, renders the switcher, aria-label on the toggle button |
-| app/layout.js | modify | Resolves locale, sets `html lang`, passes slices |
-| app/_components/Footer/index.jsx | modify | Dictionary strings |
-| app/account/layout.jsx | modify | Async layout, dictionary labels |
-| app/_ui/GuestDropdown/GuestDropdown.jsx | modify | Dictionary labels (History, Profile, Logout) |
+| app/app/_lib/i18n/config.js | create | Locales, default, cookie name, labels, `isSupportedLocale`. |
+| app/app/_lib/i18n/dictionaries/en.js | create | English dictionary. |
+| app/app/_lib/i18n/dictionaries/it.js | create | Italian dictionary, same keys as en.js. |
+| app/app/_lib/i18n/dictionaries/index.js | create | Aggregates dictionaries by locale. |
+| app/app/_lib/i18n/index.js | create | `resolveLocale`, `getLocale`, `getDictionary`. |
+| app/app/_lib/i18n/actions.js | create | `setLanguageAction` server action with validation. |
+| app/app/_ui/LanguageSwitcher/index.jsx | create | Client drop-down with a labelled select and a `role="alert"` error. |
+| app/app/_ui/LanguageSwitcher/styles.module.css | create | Styles for the drop-down. |
+| app/app/_ui/Navbar.jsx | modify | Dictionary labels and the language switcher. |
+| app/app/layout.js | modify | Locale resolution, `<html lang>`, props passed to Navbar and Footer. |
+| app/app/_components/Footer/index.jsx | modify | `dict.footer` strings. |
+| app/app/account/layout.jsx | modify | Async layout using `dict.account`. |
+| app/app/_ui/GuestDropdown/GuestDropdown.jsx | modify | `dict.history`, `dict.profile` and `dict.logout`. |
 
 ## Unplanned file changes
-None.
+None. The test file listed in the design belongs to the Tester. `package.json` was not changed.
 
 ## New dependencies added
 None.
@@ -30,11 +30,12 @@ None.
 None.
 
 ## Assumptions made
-- Next 14: `cookies()` is synchronous, so it is not awaited.
-- GuestDropdown labels (History, Profile, Logout) come from `dict.navbar` (extra keys `history`, `profile`, `logout`). The design only named `account.*`, so I added these keys to the navbar namespace in both dictionaries.
-- The `languageChangeFailed` error text is passed from the layout to the switcher through Navbar's `errors` prop.
+- The project uses Next 14, so `cookies()` is synchronous. `getLocale` is still async so callers can `await` it.
+- GuestDropdown receives the navbar slice. That slice has the extra keys `history`, `profile` and `logout`.
+- No `test` script was added to `package.json`. The Coder must not change the manifest beyond what the design names.
+- Footer contact details (email, phone, address) and the newsletter placeholder are data rather than translatable copy, so they stay hard-coded.
 
-## Verification status
-- Lint NOT run successfully. `npm run lint` fails with `next: not found` because `node_modules` is not installed in this environment. `npx eslint` fails because there is no flat config. No lint result exists.
-- No targeted tests were run. The project has no test script, and test files belong to the Tester.
-- `git diff --stat` shows only the five modified existing files, with small diffs.
+## Verification
+- `next lint` could not run: the installed `next` rejects the invocation and treats `lint` as a project directory.
+- `npx eslint` picked up ESLint 10, which needs a flat config, so it failed.
+- No test script exists in the project, so no targeted tests were run.
