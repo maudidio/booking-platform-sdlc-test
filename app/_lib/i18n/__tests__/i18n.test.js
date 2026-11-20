@@ -100,6 +100,81 @@ test("AC-1: Footer dictionaries are defined", () => {
   assert.strictEqual(dictionaries.en.footer.contactUs, "Contact Us");
 });
 
+// AC-1: the eight new namespaces exist in both locales with identical keys
+const NEW_NS_KEYS = ["home", "contact", "auth", "rooms", "checkout", "history", "profile", "payment"];
+
+for (const ns of NEW_NS_KEYS) {
+  test(`AC-1: namespace '${ns}' exists in en and it with identical keys`, () => {
+    assert.ok(en[ns] && typeof en[ns] === "object");
+    assert.ok(it[ns] && typeof it[ns] === "object");
+    assert.ok(Object.keys(en[ns]).length > 0);
+    assert.deepStrictEqual(Object.keys(it[ns]).sort(), Object.keys(en[ns]).sort());
+  });
+}
+
+test("AC-1: en values for the new namespaces equal the original hard-coded literals", () => {
+  assert.strictEqual(en.rooms.banner, "Accomodation Options");
+  assert.strictEqual(en.rooms.search, "Search");
+  assert.strictEqual(en.rooms.from, "From");
+  assert.strictEqual(en.rooms.perNight, "/ Night");
+  assert.strictEqual(en.auth.signIn, "Sign In");
+  assert.strictEqual(en.auth.signInBanner, "My Account");
+  assert.strictEqual(en.auth.registerBanner, "REGISTER");
+  assert.strictEqual(en.payment.forbidden, "Forbidden");
+  assert.strictEqual(en.home.heroLine1, "Find Comfort In a Foriegn Land With Us");
+  assert.strictEqual(en.home.standardChunk, "The standard chunck");
+  assert.strictEqual(en.history.heading, "Your History");
+  assert.strictEqual(en.profile.heading, "Edit Profile");
+  assert.strictEqual(en.checkout.banner, "BOOKING CONFIRMATION");
+  assert.strictEqual(en.contact.bannerTitle, "REACHING OUT");
+});
+
+test("AC-1: it values for spot-checked new keys are the Italian translations", () => {
+  assert.strictEqual(it.rooms.search, "Cerca");
+  assert.strictEqual(it.auth.signIn, "Accedi");
+  assert.strictEqual(it.payment.forbidden, "Accesso negato");
+  assert.strictEqual(it.history.heading, "La tua cronologia");
+  assert.strictEqual(it.profile.heading, "Modifica profilo");
+  assert.strictEqual(it.checkout.banner, "CONFERMA DELLA PRENOTAZIONE");
+});
+
+test("AC-1: Italian values differ from English for spot-checked new keys", () => {
+  const pairs = [
+    [it.rooms.search, en.rooms.search],
+    [it.auth.signIn, en.auth.signIn],
+    [it.payment.forbidden, en.payment.forbidden],
+    [it.history.heading, en.history.heading],
+    [it.profile.heading, en.profile.heading],
+    [it.checkout.banner, en.checkout.banner],
+    [it.contact.send, en.contact.send],
+    [it.home.heroLine1, en.home.heroLine1],
+  ];
+  for (const [itValue, enValue] of pairs) {
+    assert.notStrictEqual(itValue, enValue);
+  }
+});
+
+test("AC-1: en.rooms.from and en.rooms.perNight are non-empty strings", () => {
+  assert.strictEqual(typeof en.rooms.from, "string");
+  assert.ok(en.rooms.from.length > 0);
+  assert.strictEqual(typeof en.rooms.perNight, "string");
+  assert.ok(en.rooms.perNight.length > 0);
+});
+
+test("AC-2: unsupported lang values ('fr', '', null, 'EN') resolve to 'en'", () => {
+  assert.strictEqual(resolveLocale("fr"), "en");
+  assert.strictEqual(resolveLocale(""), "en");
+  assert.strictEqual(resolveLocale(null), "en");
+  assert.strictEqual(resolveLocale("EN"), "en");
+});
+
+test("AC-2: unsupported lang falls back to the English strings of the new namespaces", () => {
+  const dict = dictionaries[resolveLocale("fr")];
+  assert.strictEqual(dict.rooms.search, "Search");
+  assert.strictEqual(dict.auth.signIn, "Sign In");
+  assert.strictEqual(dict.payment.forbidden, "Forbidden");
+});
+
 test("AC-1: Account dictionaries are defined", () => {
   assert.ok(dictionaries.en.account);
   assert.ok(dictionaries.it.account);
