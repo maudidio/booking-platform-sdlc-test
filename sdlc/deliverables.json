@@ -1,0 +1,18 @@
+{
+  "deliverables": [
+    {"path": "app/_lib/i18n/locales.js", "type": "CREATE", "description": "Supported locales, default, cookie name, labels and isSupportedLocale validator.", "agent": "Coder"},
+    {"path": "app/_lib/i18n/dictionaries/en.js", "type": "CREATE", "description": "English translation dictionary.", "agent": "Coder"},
+    {"path": "app/_lib/i18n/dictionaries/it.js", "type": "CREATE", "description": "Italian translation dictionary with same keys as English.", "agent": "Coder"},
+    {"path": "app/_lib/i18n/index.js", "type": "CREATE", "description": "Pure getDictionary(locale) helper with English fallback.", "agent": "Coder"},
+    {"path": "app/_lib/i18n/getLocale.js", "type": "CREATE", "description": "Server helper reading the locale cookie with validation and default.", "agent": "Coder"},
+    {"path": "app/_lib/actions.js", "type": "MODIFY", "description": "Add setLocaleAction server action that validates and stores the locale cookie.", "agent": "Coder"},
+    {"path": "app/_ui/LanguageSelector/index.jsx", "type": "CREATE", "description": "Client drop-down component to switch language.", "agent": "Coder"},
+    {"path": "app/_ui/LanguageSelector/styles.module.css", "type": "CREATE", "description": "Styles for the language selector.", "agent": "Coder"},
+    {"path": "app/_ui/Navbar.jsx", "type": "MODIFY", "description": "Use dictionary labels and render the selector at the top right.", "agent": "Coder"},
+    {"path": "app/layout.js", "type": "MODIFY", "description": "Resolve locale and dictionary, set html lang, pass props to Navbar and Footer.", "agent": "Coder"},
+    {"path": "app/_components/Footer/index.jsx", "type": "MODIFY", "description": "Use dictionary strings.", "agent": "Coder"},
+    {"path": "app/account/layout.jsx", "type": "MODIFY", "description": "Sidebar labels from dictionary.", "agent": "Coder"},
+    {"path": "package.json", "type": "MODIFY", "description": "Add test script using node --test.", "agent": "Coder"},
+    {"path": "tests/i18n.test.mjs", "type": "CREATE", "description": "node:test unit tests for locales, dictionary parity and fallback.", "agent": "Tester"}
+  ]
+}
