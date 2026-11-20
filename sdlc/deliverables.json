@@ -1,0 +1,17 @@
+{
+  "deliverables": [
+    {"path": "app/_lib/i18n/config.mjs", "type": "CREATE", "description": "Supported locales, default locale, labels and cookie name.", "agent": "Coder"},
+    {"path": "app/_lib/i18n/dictionaries/en.mjs", "type": "CREATE", "description": "English translation dictionary.", "agent": "Coder"},
+    {"path": "app/_lib/i18n/dictionaries/it.mjs", "type": "CREATE", "description": "Italian translation dictionary.", "agent": "Coder"},
+    {"path": "app/_lib/i18n/translate.mjs", "type": "CREATE", "description": "Pure helpers: isSupportedLocale, normalizeLocale, getDictionary, t.", "agent": "Coder"},
+    {"path": "app/_lib/i18n/server.js", "type": "CREATE", "description": "Reads the lang cookie to get the current locale and dictionary.", "agent": "Coder"},
+    {"path": "app/_lib/actions.js", "type": "MODIFY", "description": "Add setLanguageAction that validates the language and sets the cookie.", "agent": "Coder"},
+    {"path": "app/_ui/LanguageSelector/index.jsx", "type": "CREATE", "description": "Client-side language drop-down.", "agent": "Coder"},
+    {"path": "app/_ui/LanguageSelector/styles.module.css", "type": "CREATE", "description": "Styles for the language selector.", "agent": "Coder"},
+    {"path": "app/_ui/Navbar.jsx", "type": "MODIFY", "description": "Translate labels and render the selector at the top right.", "agent": "Coder"},
+    {"path": "app/_ui/GuestDropdown/GuestDropdown.jsx", "type": "MODIFY", "description": "Translate History, Profile and Logout.", "agent": "Coder"},
+    {"path": "app/layout.js", "type": "MODIFY", "description": "Resolve locale, set html lang, pass dictionary and action to Navbar.", "agent": "Coder"},
+    {"path": "package.json", "type": "MODIFY", "description": "Add a test script using node --test.", "agent": "Coder"},
+    {"path": "tests/i18n.test.mjs", "type": "CREATE", "description": "node:test unit tests for dictionaries and helpers covering AC-1 and AC-2.", "agent": "Tester"}
+  ]
+}
