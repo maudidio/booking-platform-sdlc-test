@@ -1,0 +1,20 @@
+[
+  {
+    "criterion": "AC-1",
+    "text": "Given the application, When a user uses the translations capability, Then it behaves as described in the goal.",
+    "probes": [],
+    "tests": [
+      "app/tests/test_i_want_users_to_be_able_to_select_a_diff.py"
+    ],
+    "status": "test-linked"
+  },
+  {
+    "criterion": "AC-2",
+    "text": "Given invalid input, When a user uses the translations capability, Then a clear error is returned and nothing changes.",
+    "probes": [],
+    "tests": [
+      "app/tests/test_i_want_users_to_be_able_to_select_a_diff.py"
+    ],
+    "status": "test-linked"
+  }
+]
