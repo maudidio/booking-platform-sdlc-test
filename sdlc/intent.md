@@ -1,8 +1,8 @@
-# I want users to be able to select a different language for the web app using a d
+# I want that translation functionality applies to all webapp pages, not just head
 
 ### Goal
 
-I want users to be able to select a different language for the web app using a drop down list on top right corner of all pages. Languages to support are English and Italian. Translations should be available in the repo as dictionary that developers can easily access and fix if needed.
+I want that translation functionality applies to all webapp pages, not just header and footer
 
 ### Scope
 
@@ -14,8 +14,8 @@ Standard library only. Keep existing behaviour unchanged.
 
 ### Acceptance criteria
 
-- AC-1: Given the application, When a user uses the translations capability, Then it behaves as described in the goal.
-- AC-2: Given invalid input, When a user uses the translations capability, Then a clear error is returned and nothing changes.
+- AC-1: Given the application, When a user uses the functionality capability, Then it behaves as described in the goal.
+- AC-2: Given invalid input, When a user uses the functionality capability, Then a clear error is returned and nothing changes.
 
 ### Non-goals
 
