@@ -1,0 +1,10 @@
+[
+  {
+    "id": "AC-1",
+    "text": "Given the application, When a user uses the translations capability, Then it behaves as described in the goal."
+  },
+  {
+    "id": "AC-2",
+    "text": "Given invalid input, When a user uses the translations capability, Then a clear error is returned and nothing changes."
+  }
+]
