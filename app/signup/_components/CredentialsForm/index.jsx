@@ -16,23 +16,23 @@ const initialState = {
   critical: "",
 };
 
-function CredentialsForm({ registerAction, authAction }) {
+function CredentialsForm({ registerAction, authAction, dict }) {
   const [state, formAction] = useFormState(registerAction, initialState);
 
   const [showPassword, setShowPassword] = useState(false);
 
   const errors = Object.values(state)?.filter((item) => item.length);
-  if (errors.length) errors.forEach((item) => toast.error(item ?? "Failed to sign in, please try again"));
+  if (errors.length) errors.forEach((item) => toast.error(item ?? dict.failedSignIn));
 
   return (
     <form action={formAction} className={styles.form}>
-      <h2 className={styles.loginHeading}>Sign Up</h2>
+      <h2 className={styles.loginHeading}>{dict.signUpHeading}</h2>
 
       {state.critical && <Alert>{state.critical}</Alert>}
 
       <div className={styles.formControl}>
         <label htmlFor="" className={styles.loginLabel}>
-          Fullname
+          {dict.fullname}
         </label>
         <input type="text" name="fullname" className={styles.loginInput} />
         {state.fullname && <span className={styles.errorMessage}>{state.fullname}</span>}
@@ -40,14 +40,14 @@ function CredentialsForm({ registerAction, authAction }) {
 
       <div className={styles.formControl}>
         <label htmlFor="" className={styles.loginLabel}>
-          Email Address
+          {dict.emailAddress}
         </label>
         <input type="email" name="email" className={styles.loginInput} />
         {state.email && <span className={styles.errorMessage}>{state.email}</span>}
       </div>
       <div className={styles.formControl}>
         <label htmlFor="" className={styles.loginLabel}>
-          Password
+          {dict.password}
         </label>
         <div className={styles.passwordContainer}>
           <input type={showPassword ? "text" : "password"} name="password" className={styles.loginInput} />
@@ -60,7 +60,7 @@ function CredentialsForm({ registerAction, authAction }) {
 
       <div className={styles.formControl}>
         <label htmlFor="" className={styles.loginLabel}>
-          Confirm Password
+          {dict.confirmPassword}
         </label>
         <div className={styles.passwordContainer}>
           <input type={showPassword ? "text" : "password"} name="confirm_password" className={styles.loginInput} />
@@ -71,12 +71,12 @@ function CredentialsForm({ registerAction, authAction }) {
         {state.confirm_password && <span className={styles.errorMessage}>{state.confirm_password}</span>}
       </div>
 
-      <SignUpButton />
+      <SignUpButton dict={dict} />
 
       <br />
 
       <p>
-        Already have an account? <Link href="/signin">Sign In</Link>
+        {dict.haveAccount} <Link href="/signin">{dict.signIn}</Link>
       </p>
       <Toaster position="top-center" reverseOrder={false} />
     </form>

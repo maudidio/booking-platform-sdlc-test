@@ -6,19 +6,19 @@ import toast, { Toaster } from "react-hot-toast";
 import SubmitButton from "@/app/_ui/SubmitButton";
 import Alert from "@/app/_ui/Alert";
 
-function ContactForm({ contactAction }) {
+function ContactForm({ contactAction, dict }) {
   const [state, formAction] = useFormState(contactAction, { errors: {} });
   const resetBtnRef = useRef(null);
   const formRef = useRef(null);
 
   if (state.isSuccess) {
-    toast.success("Message has been sent");
+    toast.success(dict.sent);
     // CLEAR FORM INPUTS
     resetBtnRef.current?.click();
   } else if (state.errors.critical) {
     toast.error(state.errors.critical);
   } else if (Object.values(state.errors).length) {
-    toast.error("Invalid contact data");
+    toast.error(dict.invalidData);
   }
   return (
     <form ref={formRef} action={formAction} className={styles.contactForm}>
@@ -27,32 +27,32 @@ function ContactForm({ contactAction }) {
       )}
 
       <div>
-        <input name="fullname" type="text" placeholder="Name" />
+        <input name="fullname" type="text" placeholder={dict.name} />
         {state.errors?.fullname && (
           <span className={styles.errorMessage}>{state.errors.fullname}</span>
         )}
       </div>
       <div>
-        <input name="email" type="email" placeholder="Email" />
+        <input name="email" type="email" placeholder={dict.email} />
         {state.errors?.email && (
           <span className={styles.errorMessage}>{state.errors.email}</span>
         )}
       </div>
       <div>
-        <input name="phone" type="tel" placeholder="Phone" />
+        <input name="phone" type="tel" placeholder={dict.phone} />
         {state.errors?.phone && (
           <span className={styles.errorMessage}>{state.errors.phone}</span>
         )}
       </div>
       <div>
-        <textarea name="message" placeholder="Message" rows={5}></textarea>
+        <textarea name="message" placeholder={dict.message} rows={5}></textarea>
         {state.errors?.message && (
           <span className={styles.errorMessage}>{state.errors.message}</span>
         )}
       </div>
 
       <div>
-        <SubmitButton type="submit">Send</SubmitButton>
+        <SubmitButton type="submit">{dict.send}</SubmitButton>
         <button
           type="reset"
           className={styles.resetButton}

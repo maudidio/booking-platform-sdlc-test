@@ -11,6 +11,7 @@ import { revalidatePath } from "next/cache";
 import { profileSchema } from "@/app/_lib/zodSchemas";
 import { hashSync } from "bcryptjs";
 import { redirect } from "next/navigation";
+import { getDictionary } from "@/app/_lib/i18n";
 
 export const metadata = {
   title: "My Profile",
@@ -18,6 +19,7 @@ export const metadata = {
 };
 
 async function Profile() {
+  const dict = (await getDictionary()).profile;
   const session = await auth();
   if (!session?.user?.email) redirect("/signin");
 
@@ -104,7 +106,7 @@ async function Profile() {
 
   return (
     <>
-      <Heading textClassName={styles.heading}>Edit Profile</Heading>
+      <Heading textClassName={styles.heading}>{dict.heading}</Heading>
       <ProfileForm guestUpdateAction={guestUpdateAction} guest={user} />
     </>
   );

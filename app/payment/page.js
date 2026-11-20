@@ -4,6 +4,7 @@ import { notFound, redirect } from "next/navigation";
 import SuccessPage from "./_components/SuccessPage/SuccessPage";
 import ExpirePage from "./_components/ExpirePage/ExpirePage";
 import { auth } from "@/auth";
+import { getDictionary } from "../_lib/i18n";
 const stripe = new Stripe(process.env.STRIPE_SECRET_KEY);
 
 export const metadata = {
@@ -11,6 +12,7 @@ export const metadata = {
 };
 
 export default async function PreviewPage({ searchParams }) {
+  const dict = (await getDictionary()).payment;
   const session_id = searchParams?.session_id;
   // console.log({ session_id });
 
@@ -18,7 +20,7 @@ export default async function PreviewPage({ searchParams }) {
     return (
       <div className="container">
         {" "}
-        <h1>Forbidden</h1>
+        <h1>{dict.forbidden}</h1>
       </div>
     );
 
@@ -37,13 +39,13 @@ export default async function PreviewPage({ searchParams }) {
     strip_session.status === "expired" ||
     new Date() > new Date(strip_session.expires_at * 1000)
   )
-    return <ExpirePage />;
+    return <ExpirePage dict={dict} />;
 
   if (
     strip_session.status === "complete" &&
     strip_session.payment_status === "paid"
   ) {
-    return <SuccessPage reservation={reservation} />;
+    return <SuccessPage reservation={reservation} dict={dict} />;
   }
 
   if (
@@ -53,5 +55,5 @@ export default async function PreviewPage({ searchParams }) {
     redirect("/reservations/checkout");
   }
 
-  return <ExpirePage />;
+  return <ExpirePage dict={dict} />;
 }

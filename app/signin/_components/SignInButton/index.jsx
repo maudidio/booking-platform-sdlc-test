@@ -1,11 +1,11 @@
 import styles from "./styles.module.css";
 import { useFormStatus } from "react-dom";
 
-function SignInButton() {
+function SignInButton({ dict }) {
   const { pending } = useFormStatus();
   return (
     <button className={styles.formButton} disabled={pending}>
-      {pending ? "Checking..." : "Sign In"}
+      {pending ? dict.checking : dict.signIn}
     </button>
   );
 }
