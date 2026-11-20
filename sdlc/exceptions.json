@@ -1,0 +1,106 @@
+{
+  "run_id": "5c754d07-8585-4324-b642-5d0e6f1c80c8",
+  "created": "2026-11-20T16:24:19.667083+00:00",
+  "exceptions": [
+    {
+      "stage": "code_review",
+      "class": "rejected",
+      "detail": "Code review not APPROVED after all retries (sdlc/code-review.md)"
+    },
+    {
+      "stage": "qa",
+      "class": "rejected",
+      "detail": "QA review not APPROVED after all retries (sdlc/qa-review.md)"
+    },
+    {
+      "stage": "code_reviewer",
+      "class": "loop_exhausted",
+      "detail": "coder_loop exhausted after 2 attempts (code_reviewer still 'rejected'); continuing to 'approved' with the finding recorded"
+    },
+    {
+      "stage": "qa",
+      "class": "loop_exhausted",
+      "detail": "qa_loop exhausted after 2 attempts (qa still 'rejected'); continuing to 'approved' with the finding recorded"
+    },
+    {
+      "stage": "dependency_audit",
+      "class": "vulnerable_dependency",
+      "detail": "@auth/core: new high/critical advisory"
+    },
+    {
+      "stage": "dependency_audit",
+      "class": "vulnerable_dependency",
+      "detail": "@mapbox/node-pre-gyp: new high/critical advisory"
+    },
+    {
+      "stage": "dependency_audit",
+      "class": "vulnerable_dependency",
+      "detail": "axios: new high/critical advisory"
+    },
+    {
+      "stage": "dependency_audit",
+      "class": "vulnerable_dependency",
+      "detail": "brace-expansion: new high/critical advisory"
+    },
+    {
+      "stage": "dependency_audit",
+      "class": "vulnerable_dependency",
+      "detail": "form-data: new high/critical advisory"
+    },
+    {
+      "stage": "dependency_audit",
+      "class": "vulnerable_dependency",
+      "detail": "immutable: new high/critical advisory"
+    },
+    {
+      "stage": "dependency_audit",
+      "class": "vulnerable_dependency",
+      "detail": "jws: new high/critical advisory"
+    },
+    {
+      "stage": "dependency_audit",
+      "class": "vulnerable_dependency",
+      "detail": "minimatch: new high/critical advisory"
+    },
+    {
+      "stage": "dependency_audit",
+      "class": "vulnerable_dependency",
+      "detail": "nanoid: new high/critical advisory"
+    },
+    {
+      "stage": "dependency_audit",
+      "class": "vulnerable_dependency",
+      "detail": "next: new high/critical advisory"
+    },
+    {
+      "stage": "dependency_audit",
+      "class": "vulnerable_dependency",
+      "detail": "next-auth: new high/critical advisory"
+    },
+    {
+      "stage": "dependency_audit",
+      "class": "vulnerable_dependency",
+      "detail": "picomatch: new high/critical advisory"
+    },
+    {
+      "stage": "dependency_audit",
+      "class": "vulnerable_dependency",
+      "detail": "postcss: new high/critical advisory"
+    },
+    {
+      "stage": "dependency_audit",
+      "class": "vulnerable_dependency",
+      "detail": "source-map-js: new high/critical advisory"
+    },
+    {
+      "stage": "dependency_audit",
+      "class": "vulnerable_dependency",
+      "detail": "tar: new high/critical advisory"
+    },
+    {
+      "stage": "dependency_audit",
+      "class": "vulnerable_dependency",
+      "detail": "zod: new high/critical advisory"
+    }
+  ]
+}
