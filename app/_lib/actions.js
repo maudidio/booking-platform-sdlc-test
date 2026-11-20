@@ -16,6 +16,7 @@ import { revalidatePath } from "next/cache";
 import { createGuest, getGuestByEmail } from "./supabase/guests";
 import { hash, hashSync } from "bcryptjs";
 import { createMessage } from "./supabase/inbox";
+import { LOCALE_COOKIE, isSupportedLocale } from "./i18n/locales";
 
 export async function authAction(prevState, formData) {
   // await new Promise((res) => setTimeout(res, 500));
@@ -257,4 +258,18 @@ export async function contactAction(state, formData) {
   }
 
   return { ...currentState, isSuccess: true, errors: {} };
+}
+
+export async function setLocaleAction(locale) {
+  if (!isSupportedLocale(locale))
+    return { ok: false, error: "Unsupported language." };
+
+  cookies().set(LOCALE_COOKIE, locale, {
+    path: "/",
+    maxAge: 31536000,
+    sameSite: "lax",
+    secure: process.env.NODE_ENV === "production",
+  });
+  revalidatePath("/", "layout");
+  return { ok: true, locale };
 }

@@ -3,8 +3,11 @@ import styles from "./styles.module.css";
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
 import { faHistory, faSignOut, faUser } from "@fortawesome/free-solid-svg-icons";
 import { signOutAction } from "../_lib/actions";
+import { getLocale } from "../_lib/i18n/getLocale";
+import { getDictionary } from "../_lib/i18n";
 
 function Layout({ children }) {
+  const dict = getDictionary(getLocale());
   return (
     <section className={styles.accountLayout}>
       <aside className={styles.accountSidebar}>
@@ -14,7 +17,7 @@ function Layout({ children }) {
               <span>
                 <FontAwesomeIcon icon={faHistory} />
               </span>
-              <span>History</span>
+              <span>{dict.account.history}</span>
             </Link>
           </li>
           <li>
@@ -22,7 +25,7 @@ function Layout({ children }) {
               <span>
                 <FontAwesomeIcon icon={faUser} />
               </span>
-              <span>Profile</span>
+              <span>{dict.account.profile}</span>
             </Link>
           </li>
           <li>
@@ -31,7 +34,7 @@ function Layout({ children }) {
                 <span>
                   <FontAwesomeIcon icon={faSignOut} />
                 </span>
-                <span>Sign out</span>
+                <span>{dict.account.signOut}</span>
               </button>
             </form>
           </li>

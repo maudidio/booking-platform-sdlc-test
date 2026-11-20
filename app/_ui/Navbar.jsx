@@ -6,8 +6,9 @@ import fa_styles from "@fortawesome/fontawesome-svg-core/styles.css";
 import { useState } from "react";
 import { usePathname } from "next/navigation";
 import GuestDropdown from "./GuestDropdown/GuestDropdown";
+import LanguageSelector from "./LanguageSelector";
 
-function Navbar({ user, signOutAction }) {
+function Navbar({ user, signOutAction, locale, dict }) {
   const [hideMenu, setHideMenu] = useState(true);
   const pathname = usePathname();
   return (
@@ -18,7 +19,7 @@ function Navbar({ user, signOutAction }) {
           <ul>
             <li>
               <Link className={pathname === "/" ? "active" : ""} href="/" onClick={() => setHideMenu(true)}>
-                Home
+                {dict.nav.home}
               </Link>
             </li>
             <li>
@@ -27,7 +28,7 @@ function Navbar({ user, signOutAction }) {
                 href="/rooms"
                 onClick={() => setHideMenu(true)}
               >
-                Rooms
+                {dict.nav.rooms}
               </Link>
             </li>
             {/* <li>About</li> */}
@@ -37,7 +38,7 @@ function Navbar({ user, signOutAction }) {
                 className={pathname === "/contact" ? "active" : ""}
                 onClick={() => setHideMenu(true)}
               >
-                Contact Us
+                {dict.nav.contact}
               </Link>
             </li>
             <li>
@@ -49,12 +50,13 @@ function Navbar({ user, signOutAction }) {
                   href="/signin"
                   onClick={() => setHideMenu(true)}
                 >
-                  Guest Area
+                  {dict.nav.guestArea}
                 </Link>
               )}
             </li>
           </ul>
         </nav>
+        <LanguageSelector locale={locale} label={dict.language.label} />
         <button onClick={() => setHideMenu(!hideMenu)} className="toggle-menu-button">
           <FontAwesomeIcon icon={hideMenu ? faBars : faClose} />
         </button>
