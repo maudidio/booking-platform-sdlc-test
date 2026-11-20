@@ -331,3 +331,92 @@ test("AC-1: Invalid locales fallback to default", () => {
     );
   });
 });
+
+// ============================================================================
+// AC-1: New namespaces moved from hard-coded page text (home, contact, auth,
+// rooms, checkout, history, profile, payment)
+// ============================================================================
+
+const NEW_NAMESPACES = [
+  "home",
+  "contact",
+  "auth",
+  "rooms",
+  "checkout",
+  "history",
+  "profile",
+  "payment",
+];
+
+test("AC-1: Every new namespace exists as an object in en and it", () => {
+  for (const ns of NEW_NAMESPACES) {
+    assert.ok(en[ns] && typeof en[ns] === "object", `en.${ns} must exist`);
+    assert.ok(it[ns] && typeof it[ns] === "object", `it.${ns} must exist`);
+  }
+});
+
+test("AC-1: Italian rooms.search differs from English", () => {
+  assert.notStrictEqual(it.rooms.search, en.rooms.search);
+});
+
+test("AC-1: Italian auth.signIn differs from English", () => {
+  assert.notStrictEqual(it.auth.signIn, en.auth.signIn);
+});
+
+test("AC-1: Italian payment.forbidden differs from English", () => {
+  assert.notStrictEqual(it.payment.forbidden, en.payment.forbidden);
+});
+
+test("AC-1: Italian home.cancel differs from English", () => {
+  assert.notStrictEqual(it.home.cancel, en.home.cancel);
+});
+
+test("AC-1: Italian history.viewRooms differs from English", () => {
+  assert.notStrictEqual(it.history.viewRooms, en.history.viewRooms);
+});
+
+test("AC-1: en.rooms.banner equals the original literal 'Accomodation Options'", () => {
+  assert.strictEqual(en.rooms.banner, "Accomodation Options");
+});
+
+test("AC-1: en.auth.signIn equals the original literal 'Sign In'", () => {
+  assert.strictEqual(en.auth.signIn, "Sign In");
+});
+
+test("AC-1: en.auth.signUp equals the original literal 'Sign Up'", () => {
+  assert.strictEqual(en.auth.signUp, "Sign Up");
+});
+
+test("AC-1: en.auth.checking equals the original literal 'Checking...'", () => {
+  assert.strictEqual(en.auth.checking, "Checking...");
+});
+
+test("AC-1: en.payment.forbidden equals the original literal 'Forbidden'", () => {
+  assert.strictEqual(en.payment.forbidden, "Forbidden");
+});
+
+test("AC-1: en.home.heroLine1 keeps the original typo 'Foriegn'", () => {
+  assert.strictEqual(en.home.heroLine1, "Find Comfort In a Foriegn Land With Us");
+});
+
+test("AC-1: en.contact.bannerTitle equals the original literal 'REACHING OUT'", () => {
+  assert.strictEqual(en.contact.bannerTitle, "REACHING OUT");
+});
+
+test("AC-1: en.checkout.banner equals the original literal 'BOOKING CONFIRMATION'", () => {
+  assert.strictEqual(en.checkout.banner, "BOOKING CONFIRMATION");
+});
+
+test("AC-1: en.rooms.from and en.rooms.perNight are non-empty strings", () => {
+  assert.strictEqual(typeof en.rooms.from, "string");
+  assert.ok(en.rooms.from.length > 0);
+  assert.strictEqual(typeof en.rooms.perNight, "string");
+  assert.ok(en.rooms.perNight.length > 0);
+});
+
+test("AC-1: it.rooms.from and it.rooms.perNight are non-empty strings", () => {
+  assert.strictEqual(typeof it.rooms.from, "string");
+  assert.ok(it.rooms.from.length > 0);
+  assert.strictEqual(typeof it.rooms.perNight, "string");
+  assert.ok(it.rooms.perNight.length > 0);
+});
