@@ -1,0 +1,16 @@
+# How the SDLC pipeline builds and tests this repo (see ai-native-sdlc/docs/project-manifest.md).
+# Read from the base commit before the Coder runs; changes on a work branch are not used.
+version: 1
+
+# Install dependencies once before the baseline. A failure is reported as an environment problem.
+setup: ["npm ci"]
+
+# Run after every Coder pass. Intentionally empty for now:
+#   - `npm run lint` fails on the base commit (.eslintrc.json has a trailing comma), so it would send
+#     the Coder back for a pre-existing defect on every run. Fix .eslintrc.json, then add it back:
+#     gate: ["npm run lint"]
+#   - `npm run build` needs network (Google Fonts) and Supabase/Stripe environment variables.
+gate: []
+
+# Node's built-in runner; the glob is expanded by Node itself (Node 21+).
+test: "node --test \"app/**/__tests__/*.test.js\""
