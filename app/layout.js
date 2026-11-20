@@ -5,6 +5,8 @@ import styles from "./styles.css";
 
 import { Roboto } from "next/font/google";
 import { signOutAction } from "./_lib/actions";
+import { getLocale } from "./_lib/i18n";
+import { dictionaries } from "./_lib/i18n/dictionaries";
 
 const roboto_font = Roboto({
   subsets: ["latin"],
@@ -14,12 +16,20 @@ const roboto_font = Roboto({
 
 export default async function RootLayout({ children }) {
   const session = await auth();
+  const locale = await getLocale();
+  const dict = dictionaries[locale];
   return (
-    <html lang="en">
+    <html lang={locale}>
       <body className={roboto_font.className}>
-        <Navbar user={session?.user} signOutAction={signOutAction} />
+        <Navbar
+          user={session?.user}
+          signOutAction={signOutAction}
+          dict={dict.navbar}
+          locale={locale}
+          errors={dict.errors}
+        />
         <main>{children}</main>
-        <Footer />
+        <Footer dict={dict.footer} />
       </body>
     </html>
   );

@@ -1,0 +1,50 @@
+.languageSwitcher {
+  position: relative;
+  display: flex;
+  align-items: center;
+}
+
+.select {
+  padding: 0.3rem 0.5rem;
+  font-size: 1.4rem;
+  border: 1px solid currentColor;
+  border-radius: 4px;
+  background: transparent;
+  color: inherit;
+  cursor: pointer;
+}
+
+.select option {
+  color: #161616;
+}
+
+.select:disabled {
+  opacity: 0.6;
+  cursor: wait;
+}
+
+.visuallyHidden {
+  position: absolute;
+  width: 1px;
+  height: 1px;
+  margin: -1px;
+  padding: 0;
+  overflow: hidden;
+  clip: rect(0, 0, 0, 0);
+  white-space: nowrap;
+  border: 0;
+}
+
+.error {
+  position: absolute;
+  top: 100%;
+  right: 0;
+  z-index: 10;
+  width: max-content;
+  max-width: 24rem;
+  padding: 0.4rem 0.8rem;
+  font-size: 1.2rem;
+  color: #fff;
+  background: #b00020;
+  border-radius: 4px;
+}

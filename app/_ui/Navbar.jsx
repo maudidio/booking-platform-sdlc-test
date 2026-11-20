@@ -6,8 +6,9 @@ import fa_styles from "@fortawesome/fontawesome-svg-core/styles.css";
 import { useState } from "react";
 import { usePathname } from "next/navigation";
 import GuestDropdown from "./GuestDropdown/GuestDropdown";
+import LanguageSwitcher from "./LanguageSwitcher";
 
-function Navbar({ user, signOutAction }) {
+function Navbar({ user, signOutAction, dict, locale, errors }) {
   const [hideMenu, setHideMenu] = useState(true);
   const pathname = usePathname();
   return (
@@ -18,7 +19,7 @@ function Navbar({ user, signOutAction }) {
           <ul>
             <li>
               <Link className={pathname === "/" ? "active" : ""} href="/" onClick={() => setHideMenu(true)}>
-                Home
+                {dict.home}
               </Link>
             </li>
             <li>
@@ -27,7 +28,7 @@ function Navbar({ user, signOutAction }) {
                 href="/rooms"
                 onClick={() => setHideMenu(true)}
               >
-                Rooms
+                {dict.rooms}
               </Link>
             </li>
             {/* <li>About</li> */}
@@ -37,25 +38,30 @@ function Navbar({ user, signOutAction }) {
                 className={pathname === "/contact" ? "active" : ""}
                 onClick={() => setHideMenu(true)}
               >
-                Contact Us
+                {dict.contact}
               </Link>
             </li>
             <li>
               {user ? (
-                <GuestDropdown user={user} signOutAction={signOutAction} />
+                <GuestDropdown user={user} signOutAction={signOutAction} dict={dict} />
               ) : (
                 <Link
                   className={pathname.includes("account") || pathname === "/signin" ? "active" : ""}
                   href="/signin"
                   onClick={() => setHideMenu(true)}
                 >
-                  Guest Area
+                  {dict.guestArea}
                 </Link>
               )}
             </li>
           </ul>
         </nav>
-        <button onClick={() => setHideMenu(!hideMenu)} className="toggle-menu-button">
+        <LanguageSwitcher locale={locale} label={dict.language} errorText={errors.languageChangeFailed} />
+        <button
+          onClick={() => setHideMenu(!hideMenu)}
+          className="toggle-menu-button"
+          aria-label={dict.toggleMenu}
+        >
           <FontAwesomeIcon icon={hideMenu ? faBars : faClose} />
         </button>
       </div>

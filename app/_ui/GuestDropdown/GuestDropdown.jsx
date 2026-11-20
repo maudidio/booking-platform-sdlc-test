@@ -4,7 +4,7 @@ import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
 import { faCaretDown } from "@fortawesome/free-solid-svg-icons";
 import Link from "next/link";
 
-const GuestDropdown = ({ user, signOutAction }) => {
+const GuestDropdown = ({ user, signOutAction, dict }) => {
   const [isOpen, setIsOpen] = useState(false);
 
   const toggleDropdown = () => {
@@ -39,18 +39,18 @@ const GuestDropdown = ({ user, signOutAction }) => {
       <div className={`${styles.dropdown} ${isOpen ? styles.active : ""}`}>
         <div className={styles.dropdownItem}>
           <Link className={styles.dropdownOption} href="/account/history">
-            History
+            {dict.history}
           </Link>
         </div>
         <div className={styles.dropdownItem}>
           <Link className={styles.dropdownOption} href="/account/profile">
-            Profile
+            {dict.profile}
           </Link>
         </div>
         <div className={styles.dropdownItem}>
           <form action={signOutAction}>
             <button type="submit" className={styles.dropdownOption}>
-              Logout
+              {dict.logout}
             </button>
           </form>
         </div>
