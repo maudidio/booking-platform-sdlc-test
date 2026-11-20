@@ -2,6 +2,7 @@ import Banner from "@/app/_components/Banner";
 import CheckoutForm from "./_components/CheckoutSection";
 import { auth } from "@/auth";
 import { redirect } from "next/navigation";
+import { getDictionary } from "@/app/_lib/i18n";
 
 export const metadata = {
   title: "Reservation Checkout",
@@ -13,9 +14,11 @@ async function Page() {
 
   if (!session) return redirect("/signin");
 
+  const dict = (await getDictionary()).checkout;
+
   return (
     <>
-      <Banner title={"BOOKING CONFIRMATION"} />
+      <Banner title={dict.banner} />
       <CheckoutForm />
     </>
   );

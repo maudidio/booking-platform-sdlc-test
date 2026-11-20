@@ -14,43 +14,43 @@ const initialState = {
   criticalError: "",
 };
 
-function CredentialsForm({ authAction }) {
+function CredentialsForm({ authAction, dict }) {
   const [state, formAction] = useFormState(authAction, initialState);
   const pathname = usePathname();
 
   const errors = Object.values(state)?.filter((item) => item.length);
-  if (errors.length) errors.forEach((item) => toast.error(item ?? "Failed to sign in, please try again"));
+  if (errors.length) errors.forEach((item) => toast.error(item ?? dict.failedSignIn));
 
   return (
     <form action={formAction} className={styles.form}>
-      <h2 className={styles.loginHeading}>Login</h2>
+      <h2 className={styles.loginHeading}>{dict.login}</h2>
 
       {state.criticalError && <Alert>{state.criticalError}</Alert>}
       {pathname === "/reservations/checkout" && (
-        <Alert type="warning">Please sign in before confirming your booking!</Alert>
+        <Alert type="warning">{dict.signInFirst}</Alert>
       )}
 
       <div className={styles.formControl}>
         <label htmlFor="" className={styles.loginLabel}>
-          Email Address
+          {dict.emailAddress}
         </label>
         <input type="email" name="email" className={styles.loginInput} />
         {/* {state.email && <span className={styles.errorMessage}>{state.email}</span>} */}
       </div>
       <div className={styles.formControl}>
         <label htmlFor="" className={styles.loginLabel}>
-          Password
+          {dict.password}
         </label>
         <input type="password" name="password" className={styles.loginInput} />
         {/* {state.password && <span className={styles.errorMessage}>{state.password}</span>} */}
       </div>
 
-      <SignInButton />
+      <SignInButton dict={dict} />
 
       <br />
-      <a href="#">Forget Password?</a>
+      <a href="#">{dict.forgotPassword}</a>
       <p>
-        Don't have an account? <Link href="/signup">Sign Up</Link>
+        {dict.noAccount} <Link href="/signup">{dict.signUp}</Link>
       </p>
       <Toaster position="top-center" reverseOrder={false} />
     </form>

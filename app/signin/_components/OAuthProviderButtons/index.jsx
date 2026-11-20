@@ -1,13 +1,15 @@
 import { signIn } from "@/auth";
 import styles from "./styles.module.css";
 import { cookies } from "next/headers";
+import { getDictionary } from "@/app/_lib/i18n";
 
-function OAuthProviderButtons() {
+async function OAuthProviderButtons() {
+  const dict = (await getDictionary()).auth;
   const redirectURL = cookies().has("pending_reservation") ? "/reservations/checkout" : "/account/history";
   return (
     <div>
       <div className={styles.orDivider}>
-        <span>or</span>
+        <span>{dict.or}</span>
       </div>
       <div className={styles.authProviders}>
         <form
@@ -18,7 +20,7 @@ function OAuthProviderButtons() {
         >
           <button className={styles.googleButton}>
             <img src="https://authjs.dev/img/providers/google.svg" alt="Google logo" height="24" width="24" />
-            <span>Continue with Google</span>
+            <span>{dict.continueGoogle}</span>
           </button>
         </form>
 
@@ -30,7 +32,7 @@ function OAuthProviderButtons() {
         >
           <button className={styles.facebookBtn}>
             <i className={styles.facebookIcon}></i>
-            Continue with Facebook
+            {dict.continueFacebook}
           </button>
         </form>
       </div>

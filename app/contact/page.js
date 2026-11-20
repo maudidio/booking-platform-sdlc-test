@@ -1,5 +1,6 @@
 import Banner from "../_components/Banner";
 import ContactSection from "../_components/ContactSection";
+import { getDictionary } from "../_lib/i18n";
 
 export const metadata = {
   title: "Contact Us",
@@ -7,9 +8,10 @@ export const metadata = {
 };
 
 async function Page() {
+  const dict = (await getDictionary()).contact;
   return (
     <>
-      <Banner title={"REACHING OUT"} />
+      <Banner title={dict.bannerTitle} />
       <ContactSection />
     </>
   );

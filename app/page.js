@@ -8,6 +8,7 @@ import Rooms from "./_components/Rooms";
 import LoadingSpinner from "./_ui/LoadingSpinner";
 import { redirect } from "next/navigation";
 import ContactSection from "./_components/ContactSection";
+import { getDictionary } from "./_lib/i18n";
 
 export const metadata = {
   title: "Hotel Booking App",
@@ -15,13 +16,14 @@ export const metadata = {
 };
 
 export default async function Home() {
+  const dict = (await getDictionary()).home;
   async function bookingSearchAction(formatedRange) {
     "use server";
     redirect(`/rooms?range=${formatedRange}`);
   }
   return (
     <>
-      <HeroSection bookingSearchAction={bookingSearchAction} />
+      <HeroSection bookingSearchAction={bookingSearchAction} dict={dict} />
       <About />
       <Suspense
         fallback={

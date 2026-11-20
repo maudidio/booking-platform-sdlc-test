@@ -1,22 +1,22 @@
-## 🤖 AI-generated feature: I want users to be able to select a different language for the web app using a d
+## 🤖 AI-generated feature: I want that translation functionality applies to all webapp pages, not just head
 
 ### Design
-I designed an English/Italian language drop-down for the header on every page, with the choice stored in a `lang` cookie and the translations kept in editable `en.js` and `it.js` dictionary files. The design is in `sdlc/design.md`, and the file list is in `sdlc/deliverables.json`.
+I wrote sdlc/design.md and sdlc/deliverables.json. The design moves the remaining hard-coded English text on the home, contact, signin, signup, rooms, checkout, history, profile and payment pages into the en and it dictionaries. Server components call getDictionary(), and client components receive a
 
 ### Implementation
 Build summary
 
 ### Code review
-❌ None identified. All changed files are scoped to the new i18n feature or are UI 
+❌ - app/_lib/i18n/__tests__/i18n.test.js: Tester must add tests for the new namesp
 
 ### Tests
-## Test Execution Summary
+A = 0
 
 ### QA
-❌ **Approval is recommended.**
+❌ Pre-existing, not counted: invalid ESLint config in app/.eslintrc.json.
 
 ### Cost
-Model spend for this run: $6.0005 of $10.00 budget (ModelGateway ledger).
+Model spend for this run: $7.7034 of $8.00 budget (ModelGateway ledger).
 
 ---
 See `sdlc/` for full agent reports.
@@ -25,8 +25,8 @@ See `sdlc/` for full agent reports.
 
 | Criterion | Probe(s) | Test file(s) | Status |
 |---|---|---|---|
-| **AC-1** Given the application, When a user uses the translations capability, Then it beh | - | app/app/_lib/i18n/__tests__/i18n.test.js | test-linked |
-| **AC-2** Given invalid input, When a user uses the translations capability, Then a clear  | - | app/app/_lib/i18n/__tests__/i18n.test.js | test-linked |
+| **AC-1** Given the application, When a user uses the functionality capability, Then it be | - | app/app/_lib/i18n/__tests__/i18n.test.js | test-linked |
+| **AC-2** Given invalid input, When a user uses the functionality capability, Then a clear | - | app/app/_lib/i18n/__tests__/i18n.test.js | test-linked |
 
 Test-linked criteria pass or fail with the suite: PASS
 

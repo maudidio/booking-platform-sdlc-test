@@ -1,6 +1,6 @@
 {
-  "run_id": "b8a12584-621b-4f9d-aa33-cc46a6c1c8d3",
-  "created": "2026-11-20T10:57:08.246608+00:00",
+  "run_id": "5c754d07-8585-4324-b642-5d0e6f1c80c8",
+  "created": "2026-11-20T16:24:19.667083+00:00",
   "exceptions": [
     {
       "stage": "code_review",
@@ -13,8 +13,8 @@
       "detail": "QA review not APPROVED after all retries (sdlc/qa-review.md)"
     },
     {
-      "class": "loop_exhausted",
       "stage": "code_reviewer",
+      "class": "loop_exhausted",
       "detail": "coder_loop exhausted after 2 attempts (code_reviewer still 'rejected'); continuing to 'approved' with the finding recorded"
     },
     {

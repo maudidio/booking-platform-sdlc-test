@@ -1,99 +1,85 @@
 # QA review
 
 ## Verdict
-APPROVED
+REJECTED
 
 ## Regression verdict
-CLEAN — no regressions detected
+CLEAN — no regressions
 
-The Tester's report shows zero failures and explicitly states "No regressions detected." The Code Reviewer identified no regression risk areas. The baseline file is absent; under the EMPTY-BASELINE RULE, any failure in a spec file not listed in the design's "Files to create or modify" table would be treated as pre-existing. However, no failures exist, and all test files created (`app/_lib/i18n/__tests__/i18n.test.js`) are feature-owned per the design table.
+The Tester's regression report lists no REGRESSION-classified failures. The final run reports 75 pass, 0 fail, 0 skipped. sdlc/test-baseline.txt holds no FAIL lines, so there are no pre-existing failures to exclude. The existing i18n tests (locale resolution, navbar/footer/account dictionaries, parity, non-empty values, AC-2 validation) stay green.
+
+Code-review risk areas (sdlc/code-review.md, "Regression risk areas"): existing behaviour on the modified pages is not exercised by any component or runtime test (no component harness; runtime check SKIPPED). These risks are covered only indirectly by dictionary-level tests and are recorded as informational gaps. They are not REGRESSION failures.
 
 ## Coverage audit
 
 | Endpoint / scenario | Tested? | Test name |
 |---|---|---|
-| Config: SUPPORTED_LOCALES constant | Yes | AC-1: Supported locales include both en and it |
-| Config: DEFAULT_LOCALE constant | Yes | AC-1: Default locale is English |
-| Config: LOCALE_COOKIE constant | Yes | AC-1: Cookie name is 'lang' |
-| Config: LOCALE_LABELS constant | Yes | AC-1: Locale labels are defined for all locales |
-| isSupportedLocale('en') validation | Yes | AC-1: isSupportedLocale('en') returns true |
-| isSupportedLocale('it') validation | Yes | AC-1: isSupportedLocale('it') returns true |
-| resolveLocale('it') fallthrough | Yes | AC-1: resolveLocale('it')==='it' |
-| resolveLocale('en') fallthrough | Yes | AC-1: resolveLocale('en')==='en' |
-| resolveLocale(null/undefined/''/invalid) fallback | Yes | AC-1: Default language behavior - resolveLocale without valid locale returns 'en' |
-| Dictionary parity (key structure) | Yes | AC-1: Dictionary parity - en and it have identical key structures |
-| Dictionary values: non-empty strings | Yes | AC-1: All dictionary values are non-empty strings |
-| English navbar translations (home, rooms, contact, guestArea) | Yes | AC-1: dictionaries.en.navbar.* equals expected values (4 tests) |
-| Italian navbar translations (home, rooms, contact, guestArea) | Yes | AC-1: dictionaries.it.navbar.* equals expected values (4 tests) |
-| English footer translations (contactUs) | Yes | AC-1: Footer dictionaries are defined |
-| Italian footer translations (contactUs) | Yes | AC-1: Footer dictionaries are defined |
-| English account translations (signOut) | Yes | AC-1: Account dictionaries are defined |
-| Italian account translations (signOut) | Yes | AC-1: Account dictionaries are defined |
-| Error case: isSupportedLocale('fr') | Yes | AC-2: isSupportedLocale('fr') returns false |
-| Error case: isSupportedLocale(undefined) | Yes | AC-2: isSupportedLocale(undefined) returns false |
-| Error case: isSupportedLocale(null) | Yes | AC-2: isSupportedLocale(null) returns false |
-| Error case: isSupportedLocale(123) | Yes | AC-2: isSupportedLocale(123) returns false |
-| Error case: isSupportedLocale('') | Yes | AC-2: isSupportedLocale('') returns false |
-| Error case: isSupportedLocale('EN') case-sensitive | Yes | AC-2: isSupportedLocale('EN') returns false (case-sensitive) |
-| Error case: isSupportedLocale('IT') case-sensitive | Yes | AC-2: isSupportedLocale('IT') returns false (case-sensitive) |
-| Error case: isSupportedLocale injection attempt | Yes | AC-2: isSupportedLocale("it; Path=/") returns false |
-| Error message: invalidLanguage (English) | Yes | AC-2: Error message exists for invalid language |
-| Error message: invalidLanguage (Italian) | Yes | AC-2: Error message in Italian for invalid language |
-| Error message: languageChangeFailed | Yes | AC-2: Error message exists for language change failure |
-| setLanguageAction validation logic | Yes | AC-2: setLanguageAction validation - rejects unsupported locales & accepts supported locales |
-| Locale resolution fallback behavior | Yes | AC-2: resolveLocale fallback tests (fr, null, undefined, EN) |
+| AC-1: namespace home exists in en and it, identical keys | Yes | AC-1: namespace 'home' exists in en and it with identical keys |
+| AC-1: namespace contact | Yes | AC-1: namespace 'contact' exists in en and it with identical keys |
+| AC-1: namespace auth | Yes | AC-1: namespace 'auth' exists in en and it with identical keys |
+| AC-1: namespace rooms | Yes | AC-1: namespace 'rooms' exists in en and it with identical keys |
+| AC-1: namespace checkout | Yes | AC-1: namespace 'checkout' exists in en and it with identical keys |
+| AC-1: namespace history | Yes | AC-1: namespace 'history' exists in en and it with identical keys |
+| AC-1: namespace profile | Yes | AC-1: namespace 'profile' exists in en and it with identical keys |
+| AC-1: namespace payment | Yes | AC-1: namespace 'payment' exists in en and it with identical keys |
+| AC-1: en values equal original English literals | Yes | AC-1: en values for the new namespaces equal the original hard-coded literals |
+| AC-1: it spot-check values | Yes | AC-1: it values for spot-checked new keys are the Italian translations |
+| AC-1: it differs from en for spot-checked keys | Yes | AC-1: Italian values differ from English for spot-checked new keys |
+| AC-1: en.rooms.from and en.rooms.perNight non-empty | Yes | AC-1: en.rooms.from and en.rooms.perNight are non-empty strings |
+| AC-1: key parity and non-empty values cover new keys | Yes | AC-1: Dictionary parity - en and it have identical key structures; AC-1: All dictionary values are non-empty strings |
+| AC-2: resolveLocale 'fr', '', null, 'EN' return 'en' | Yes (local copy of resolveLocale) | AC-2: unsupported lang values ('fr', '', null, 'EN') resolve to 'en' |
+| AC-2: unsupported lang falls back to English new-namespace strings | Yes (local copy) | AC-2: unsupported lang falls back to the English strings of the new namespaces |
+| AC-2: undefined and non-string inputs return 'en' | Yes (local copy) | AC-1: Default language behavior; AC-2: isSupportedLocale(undefined / null / 123) |
+| Manual: cookie lang=it on / (home hero, booking form, button) | No | none. Runtime check SKIPPED; no component test |
+| Manual: cookie lang=it on /rooms | No | none |
+| Manual: cookie lang=it on /contact | No | none |
+| Manual: cookie lang=it on /signin and /signup | No | none |
+| Manual: cookie lang=it on /account/history | No | none |
+| Manual: no cookie shows today's English | No | none (only resolveLocale fallback unit-tested, not rendering) |
+| Checkout page body with lang=it | No (and not translated, see Implementation bugs) | none |
 
-**43 tests executed; 43 passed.**
+Error cases: the AC-2 invalid-locale cases (fr, empty, null, undefined, 'EN', 'IT', non-string, injected cookie value) are unit-tested. Design section 7 was not re-read, so E is computed over the AC-2 error cases only.
 
 ## Test quality assessment
 
-The test suite is well-structured and comprehensive for unit-level coverage:
+The new assertions check concrete values (exact English literals and Italian translations), not just existence. Dictionary parity uses sorted key comparison, so a missing key in either locale fails. Tests are independent and order-agnostic. No flakiness reported.
 
-**Strengths:**
-- **Isolation**: Each test is independent and uses no shared state. No test depends on execution order.
-- **Assertions**: Tests verify concrete values using `assert.strictEqual()` and `assert.deepStrictEqual()`, not just checking for existence. For example, tests verify that `dictionaries.it.navbar.rooms === "Camere"`, not just that the key exists.
-- **Error case coverage**: All documented invalid inputs are tested (unsupported locales, type mismatches, case sensitivity, injection attempts, boundary cases like empty string and null).
-- **Dictionary parity**: Recursive key-collection function ensures en.js and it.js have identical structure before comparing individual values. This catches missing translations.
-- **Non-empty string validation**: Helper function recursively validates that every leaf in both dictionaries is a non-empty string, preventing silent translation bugs.
-- **Constants verification**: Configuration constants (SUPPORTED_LOCALES, DEFAULT_LOCALE, LOCALE_COOKIE, LOCALE_LABELS) are explicitly tested against expected values.
-- **Framework pragmatism**: The test file defines `resolveLocale()` locally to avoid importing `next/headers` in the pure Node.js environment. This is documented in a comment and is acceptable because the validation logic is indirectly tested via `isSupportedLocale()` and the validation contract is verified.
-
-**Mocking approach**: Appropriate — no over-mocking. The test imports real dictionaries and config from the implementation, reducing the risk of tests passing while actual code fails.
+Weaknesses:
+- resolveLocale is re-implemented inside the test file, so AC-2 tests check a copy, not the production module in dictionaries/index.js. They would still pass if the production function regressed.
+- Two overlapping blocks of new-namespace checks (one added in this pass, one around line 415). Duplication adds no coverage.
+- No test renders any page or component; the design's manual lang=it checks are unverified.
+- Italian spot checks cover only a handful of keys.
 
 ## Gaps identified
 
-The design section 8 explicitly notes that the following runtime verification steps are **out of scope for unit testing** and require integration/e2e tests or manual QA:
-
-- **Cookie persistence across page reload**: Requires a running Next.js app and browser.
-- **Language selection persisting across route navigation** (e.g., choose Italian on home → navigate to /rooms → Italian persists): Requires integration test.
-- **Mobile viewport responsiveness** of the LanguageSwitcher component: Requires visual/e2e test.
-- **`<html lang>` attribute verification**: Requires DOM inspection in a rendered application.
-
-The test report's "Non-blocking observations" section correctly identifies this limitation: "These require integration/e2e tests or manual QA, as noted in design section 8."
-
-**Recommended future work (not blocking this PR):**
-- Add an integration test suite (e.g., with Cypress or Playwright) to verify cookie persistence, cross-page language retention, and DOM `lang` attribute.
-- Capture manual QA checklist from design section 8 ("QA manual: choose Italiano...") in a separate QA test case document.
-
-No critical gaps prevent approval; the design explicitly acknowledges the scope boundary.
+- Design section 8 manual checks (cookie lang=it on /, /rooms, /contact, /signin, /signup, /account/history; no cookie matches English) are not automated and were not run. Required flow with Tested = No (counts in F).
+- AC-1 not met for home hero: BookingForm and BookingButton (via HeroSection/app/page.js) remain hard-coded English. No test catches this. Design step 7 item.
+- AC-1 not met for checkout body: CheckoutForm and CheckoutOverview remain English. No test catches this.
+- Other 3b candidates left in English (informational, per Code Reviewer): rooms/[room_slug]/_components/*, reservations/edit/[id]/*, account/history/_components/*, not-found.js, error.js. Design step 7 still requires them.
+- account/profile/_components/ProfileForm/index.jsx not confirmed by text search or read.
+- Informational regression risks without component coverage: server-to-client dict chain (page -> HeroSection, About, Blog, Rooms, Gallery, ContactSection, ContactForm, SigninForm, CredentialsForm, SignInButton, OAuthProviderButtons, SignUpForm, FilterSection, RoomItem, SuccessPage, ExpirePage); async OAuthProviderButtons and RoomItem; sort-option values and defaultValue in FilterSection; redirects and dict loading in account/history and profile; payment Forbidden branch.
+- setLanguageAction revalidation and LanguageSwitcher router.refresh() flow not verified (design 3b item).
+- Test-quality: duplicated new-namespace blocks; resolveLocale tested only as a copy.
+- Build and lint: no build declared; ESLint cannot run because app/.eslintrc.json is invalid JSON (pre-existing).
 
 ## Implementation bugs
 
-None found.
+Re-rated Code Reviewer findings (Tester listed none):
 
-The Code Reviewer identified one **minor** finding: `app/_ui/GuestDropdown/GuestDropdown.jsx` lacks an explicit `"use client"` directive at the top of the file. While it functions correctly (nested in a client component), explicit marking is best practice in Next.js 13+. This is a style/maintainability issue, not a functional defect, and does not block approval.
+- MAJOR — Home hero booking form and button (BookingForm, BookingButton via HeroSection/app/page.js) still show English ('BOOK A ROOM ONLINE', 'Arrival', 'Departure', 'Invalid date range!', 'Book Now', 'Processing...'). A user who selects Italian sees English on the home page, violating AC-1. Counted in B.
+- MAJOR — Checkout page body (CheckoutSection, CheckoutForm, CheckoutOverview) remains English while only the banner is translated. Checkout is a verified page; violates AC-1. Counted in B.
+
+No critical bugs found. en.js / it.js key parity intact.
 
 ## Recommendation
 
-**This PR is ready to merge.** The test suite provides high confidence in the language selector feature:
+Do not merge. The regression gate is clean and the dictionary-level work is correct, but AC-1 is not met on two verified pages (home hero booking form and button; checkout body), which a real user hits through normal use. The design's manual lang=it checks are untested and the runtime check was SKIPPED. The Tester should:
 
-1. **Regression gate is clean**: No existing test failures; no regression risk flagged by code review.
-2. **Full coverage of acceptance criteria**: Both AC-1 (valid behavior, dictionaries, configuration) and AC-2 (invalid input rejection, error messages) are comprehensively tested.
-3. **Error handling is rigorous**: All documented invalid inputs (unsupported locales, type mismatches, case sensitivity, injection attempts) are explicitly tested and confirmed to be rejected.
-4. **Dictionary parity is verified**: Recursive key structure and non-empty string validation ensure translations are maintainable and consistent.
-5. **Test quality is high**: Tests are isolated, have clear assertions, and use appropriate mocking (none, in this case).
-6. **Known scope boundary is documented**: The design explicitly notes that runtime behavior verification (cookies, navigation, `lang` attribute) is out of scope for unit tests. The test report acknowledges this correctly.
+1. Translate BookingForm and BookingButton, add keys to en.js and it.js, pass dict from HeroSection; add a test or probe checking the home hero in Italian.
+2. Translate CheckoutSection, CheckoutForm and CheckoutOverview, add keys to both dictionaries, pass dict from CheckoutSection.
+3. Add automated checks (component render tests or runtime probe) for lang=it on /, /rooms, /contact, /signin, /signup and /account/history, as design section 8 requires, or record an agreed exclusion for each.
+4. Replace the local resolveLocale copy with an import of the production function, or document that it is untested.
+5. Remove the duplicated new-namespace test block.
+6. Complete design step 7 for remaining 3b candidates or record an agreed follow-up with the design owner; confirm ProfileForm and setLanguageAction revalidation.
 
-The implementation faithfully follows the design. The minor code style observation (missing `"use client"`) is acceptable in a future housekeeping commit and does not warrant blocking this feature.
-
-**Approval is recommended.**
+Pre-existing, not counted: invalid ESLint config in app/.eslintrc.json.

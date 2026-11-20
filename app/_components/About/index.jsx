@@ -1,13 +1,15 @@
 import Heading from "@/app/_ui/Heading";
 import styles from "./styles.module.css";
 import Image from "next/image";
+import { getDictionary } from "@/app/_lib/i18n";
 
-function About() {
+async function About() {
+  const dict = (await getDictionary()).home;
   return (
     <section className={styles.aboutSection}>
       <div className={`container ${styles.aboutContainer}`}>
         <div className={styles.description}>
-          <Heading>About Us</Heading>
+          <Heading>{dict.aboutUs}</Heading>
           <p>
             Lorem ipsum dolor sit amet consectetur adipisicing elit. Veritatis perferendis itaque iure consequatur iusto
             omnis sapiente, doloribus animi velit vero impedit repellendus minus eaque quos voluptatum eum obcaecati

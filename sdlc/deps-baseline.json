@@ -1,5 +1,12 @@
 {
   "vulnerable": [],
   "licensed": [],
-  "baseline_command": null
+  "baseline_command": "node --test \"app/**/__tests__/*.test.js\"",
+  "setup": [
+    {
+      "command": "npm ci",
+      "exit_code": 0
+    }
+  ],
+  "baseline_exit_code": 0
 }

@@ -1,10 +1,12 @@
 import Image from "next/image";
 import styles from "./styles.module.css";
 import Link from "next/link";
+import { getDictionary } from "@/app/_lib/i18n";
 
 const SUPABASE_ROOMS_URL = process.env.NEXT_PUBLIC_SUPABASE_IMGS_URL;
 
-function RoomItem({ id, imgPath, price, link, title }) {
+async function RoomItem({ id, imgPath, price, link, title }) {
+  const dict = (await getDictionary()).rooms;
   return (
     <div className={styles.roomsGrid}>
       <div className={styles.roomItem}>
@@ -14,7 +16,7 @@ function RoomItem({ id, imgPath, price, link, title }) {
         <div className={styles.roomDescription}>
           <div>
             <h2 className={styles.roomTitle}>{title}</h2>
-            <Link href={`rooms/${id}`}>From ${price} / Night</Link>
+            <Link href={`rooms/${id}`}>{dict.from} ${price} {dict.perNight}</Link>
           </div>
         </div>
       </div>

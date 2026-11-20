@@ -1,7 +1,7 @@
 [
   {
     "criterion": "AC-1",
-    "text": "Given the application, When a user uses the translations capability, Then it behaves as described in the goal.",
+    "text": "Given the application, When a user uses the functionality capability, Then it behaves as described in the goal.",
     "probes": [],
     "tests": [
       "app/app/_lib/i18n/__tests__/i18n.test.js"
@@ -10,7 +10,7 @@
   },
   {
     "criterion": "AC-2",
-    "text": "Given invalid input, When a user uses the translations capability, Then a clear error is returned and nothing changes.",
+    "text": "Given invalid input, When a user uses the functionality capability, Then a clear error is returned and nothing changes.",
     "probes": [],
     "tests": [
       "app/app/_lib/i18n/__tests__/i18n.test.js"

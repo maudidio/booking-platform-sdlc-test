@@ -2,15 +2,22 @@
 
 - repo: maudidio/booking-platform-sdlc-test
 - base branch: main
-- base commit: b3db7893faf23a923864643db7e971f009899387
-- work branch: sdlc/run/b8a12584-621b-4f9d-aa33-cc46a6c1c8d3
-- stack: node
-- test command: `(not detected)` (run from `app/`)
+- base commit: f5358fc0b09d60554618571a53ae6b9ce692a667
+- work branch: sdlc/run/5c754d07-8585-4324-b642-5d0e6f1c80c8
+- stack: python
+- test command: `node --test "app/**/__tests__/*.test.js"` (run from `app/`)
 - target repo is checked out under `app/`; SDLC artefacts go to `sdlc/`
+- design paths are relative to the target repo: `app/` + path in the work dir (read_file accepts both)
+
+## Project commands
+
+- setup (already run by the pipeline): `npm ci`
+- build/lint gate run by the pipeline after each Coder pass: none declared
 
 ## Files
 - app/.eslintrc.json
 - app/.gitignore
+- app/.sdlc/project.yaml
 - app/Licence.txt
 - app/README.md
 - app/app/_components/About/index.jsx
@@ -50,6 +57,13 @@
 - app/app/_components/Slider.jsx
 - app/app/_lib/actions.js
 - app/app/_lib/authjs/credentialsCallback.js
+- app/app/_lib/i18n/__tests__/i18n.test.js
+- app/app/_lib/i18n/actions.js
+- app/app/_lib/i18n/config.js
+- app/app/_lib/i18n/dictionaries/en.js
+- app/app/_lib/i18n/dictionaries/index.js
+- app/app/_lib/i18n/dictionaries/it.js
+- app/app/_lib/i18n/index.js
 - app/app/_lib/services.js
 - app/app/_lib/supabase/db.js
 - app/app/_lib/supabase/guests.js
@@ -66,6 +80,8 @@
 - app/app/_ui/GuestDropdown/styles.module.css
 - app/app/_ui/Heading/index.jsx
 - app/app/_ui/Heading/styles.module.css
+- app/app/_ui/LanguageSwitcher/index.jsx
+- app/app/_ui/LanguageSwitcher/styles.module.css
 - app/app/_ui/Loader/index.jsx
 - app/app/_ui/Loader/styles.module.css
 - app/app/_ui/LoadingSpinner/index.jsx
@@ -186,22 +202,116 @@
 - app/auth.js
 - app/jsconfig.json
 - app/next.config.mjs
-- app/package-lock.json
-- app/package.json
-- app/public/bg-1.jpg
-- app/public/bg.png
-- app/public/logo.png
-- app/public/marker-icon.png
-- app/public/room.png
-- app/screenshots/booking-overview.png
-- app/screenshots/checkout.png
-- app/screenshots/details.png
-- app/screenshots/homepage.png
-- app/screenshots/login.png
-- app/screenshots/reservation-update.png
-- app/screenshots/rooms.png
-- app/screenshots/supabase-schema.png
-- app/supabase/.gitignore
-- app/supabase/config.toml
-- app/supabase/snippets/Untitled query 264.sql
-- app/supabase/snippets/Untitled query 659.sql
+- app/node_modules/.bin/acorn
+- app/node_modules/.bin/color-support
+- app/node_modules/.bin/eslint
+- app/node_modules/.bin/glob
+- app/node_modules/.bin/js-yaml
+- app/node_modules/.bin/jsesc
+- app/node_modules/.bin/json5
+- app/node_modules/.bin/loose-envify
+- app/node_modules/.bin/mkdirp
+- app/node_modules/.bin/nanoid
+- app/node_modules/.bin/next
+- app/node_modules/.bin/node-pre-gyp
+- app/node_modules/.bin/node-which
+- app/node_modules/.bin/nopt
+- app/node_modules/.bin/parser
+- app/node_modules/.bin/resolve
+- app/node_modules/.bin/rimraf
+- app/node_modules/.bin/sass
+- app/node_modules/.bin/semver
+- app/node_modules/.bin/supabase
+- app/node_modules/.bin/tsc
+- app/node_modules/.bin/tsserver
+- app/node_modules/.package-lock.json
+- app/node_modules/@auth/core/LICENSE
+- app/node_modules/@auth/core/README.md
+- app/node_modules/@auth/core/adapters.d.ts
+- app/node_modules/@auth/core/adapters.d.ts.map
+- app/node_modules/@auth/core/adapters.js
+- app/node_modules/@auth/core/errors.d.ts
+- app/node_modules/@auth/core/errors.d.ts.map
+- app/node_modules/@auth/core/errors.js
+- app/node_modules/@auth/core/index.d.ts
+- app/node_modules/@auth/core/index.d.ts.map
+- app/node_modules/@auth/core/index.js
+- app/node_modules/@auth/core/jwt.d.ts
+- app/node_modules/@auth/core/jwt.d.ts.map
+- app/node_modules/@auth/core/jwt.js
+- app/node_modules/@auth/core/lib/actions/callback/handle-login.d.ts
+- app/node_modules/@auth/core/lib/actions/callback/handle-login.d.ts.map
+- app/node_modules/@auth/core/lib/actions/callback/handle-login.js
+- app/node_modules/@auth/core/lib/actions/callback/index.d.ts
+- app/node_modules/@auth/core/lib/actions/callback/index.d.ts.map
+- app/node_modules/@auth/core/lib/actions/callback/index.js
+- app/node_modules/@auth/core/lib/actions/callback/oauth/callback.d.ts
+- app/node_modules/@auth/core/lib/actions/callback/oauth/callback.d.ts.map
+- app/node_modules/@auth/core/lib/actions/callback/oauth/callback.js
+- app/node_modules/@auth/core/lib/actions/callback/oauth/checks.d.ts
+- app/node_modules/@auth/core/lib/actions/callback/oauth/checks.d.ts.map
+- app/node_modules/@auth/core/lib/actions/callback/oauth/checks.js
+- app/node_modules/@auth/core/lib/actions/callback/oauth/csrf-token.d.ts
+- app/node_modules/@auth/core/lib/actions/callback/oauth/csrf-token.d.ts.map
+- app/node_modules/@auth/core/lib/actions/callback/oauth/csrf-token.js
+- app/node_modules/@auth/core/lib/actions/index.d.ts
+- app/node_modules/@auth/core/lib/actions/index.d.ts.map
+- app/node_modules/@auth/core/lib/actions/index.js
+- app/node_modules/@auth/core/lib/actions/session.d.ts
+- app/node_modules/@auth/core/lib/actions/session.d.ts.map
+- app/node_modules/@auth/core/lib/actions/session.js
+- app/node_modules/@auth/core/lib/actions/signin/authorization-url.d.ts
+- app/node_modules/@auth/core/lib/actions/signin/authorization-url.d.ts.map
+- app/node_modules/@auth/core/lib/actions/signin/authorization-url.js
+- app/node_modules/@auth/core/lib/actions/signin/index.d.ts
+- app/node_modules/@auth/core/lib/actions/signin/index.d.ts.map
+- app/node_modules/@auth/core/lib/actions/signin/index.js
+- app/node_modules/@auth/core/lib/actions/signin/send-token.d.ts
+- app/node_modules/@auth/core/lib/actions/signin/send-token.d.ts.map
+- app/node_modules/@auth/core/lib/actions/signin/send-token.js
+- app/node_modules/@auth/core/lib/actions/signout.d.ts
+- app/node_modules/@auth/core/lib/actions/signout.d.ts.map
+- app/node_modules/@auth/core/lib/actions/signout.js
+- app/node_modules/@auth/core/lib/actions/webauthn-options.d.ts
+- app/node_modules/@auth/core/lib/actions/webauthn-options.d.ts.map
+- app/node_modules/@auth/core/lib/actions/webauthn-options.js
+- app/node_modules/@auth/core/lib/index.d.ts
+- app/node_modules/@auth/core/lib/index.d.ts.map
+- app/node_modules/@auth/core/lib/index.js
+- app/node_modules/@auth/core/lib/init.d.ts
+- app/node_modules/@auth/core/lib/init.d.ts.map
+- app/node_modules/@auth/core/lib/init.js
+- app/node_modules/@auth/core/lib/pages/error.d.ts
+- app/node_modules/@auth/core/lib/pages/error.d.ts.map
+- app/node_modules/@auth/core/lib/pages/error.js
+- app/node_modules/@auth/core/lib/pages/index.d.ts
+- app/node_modules/@auth/core/lib/pages/index.d.ts.map
+- app/node_modules/@auth/core/lib/pages/index.js
+- app/node_modules/@auth/core/lib/pages/signin.d.ts
+- app/node_modules/@auth/core/lib/pages/signin.d.ts.map
+- app/node_modules/@auth/core/lib/pages/signin.js
+- app/node_modules/@auth/core/lib/pages/signout.d.ts
+- app/node_modules/@auth/core/lib/pages/signout.d.ts.map
+- app/node_modules/@auth/core/lib/pages/signout.js
+- app/node_modules/@auth/core/lib/pages/styles.d.ts
+- app/node_modules/@auth/core/lib/pages/styles.d.ts.map
+- app/node_modules/@auth/core/lib/pages/styles.js
+- app/node_modules/@auth/core/lib/pages/verify-request.d.ts
+- app/node_modules/@auth/core/lib/pages/verify-request.d.ts.map
+- app/node_modules/@auth/core/lib/pages/verify-request.js
+- app/node_modules/@auth/core/lib/symbols.d.ts
+- app/node_modules/@auth/core/lib/symbols.d.ts.map
+- app/node_modules/@auth/core/lib/symbols.js
+- app/node_modules/@auth/core/lib/utils/actions.d.ts
+- app/node_modules/@auth/core/lib/utils/actions.d.ts.map
+- app/node_modules/@auth/core/lib/utils/actions.js
+- app/node_modules/@auth/core/lib/utils/assert.d.ts
+- app/node_modules/@auth/core/lib/utils/assert.d.ts.map
+- app/node_modules/@auth/core/lib/utils/assert.js
+- app/node_modules/@auth/core/lib/utils/callback-url.d.ts
+- app/node_modules/@auth/core/lib/utils/callback-url.d.ts.map
+- app/node_modules/@auth/core/lib/utils/callback-url.js
+- app/node_modules/@auth/core/lib/utils/cookie.d.ts
+- app/node_modules/@auth/core/lib/utils/cookie.d.ts.map
+- app/node_modules/@auth/core/lib/utils/cookie.js
+- app/node_modules/@auth/core/lib/utils/date.d.ts

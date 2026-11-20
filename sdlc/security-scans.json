@@ -2,7 +2,7 @@
   "status": {
     "sast": "ran",
     "dependency_audit": "ran (npm)",
-    "licence_check": "not configured"
+    "licence_check": "ran (npm)"
   },
   "findings": [
     {

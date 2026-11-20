@@ -12,15 +12,14 @@ import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
 import { faSearch } from "@fortawesome/free-solid-svg-icons";
 import toast, { Toaster } from "react-hot-toast";
 
-const options = [
-  { value: "default", label: "Default Sorting" },
-  { value: "high-price", label: "From High to Low price" },
-  { value: "low-price", label: "From Low to High price" },
-  { value: "max-guests", label: "From Max to Min guests" },
-  { value: "min-guests", label: "From Min to Max guests" },
-];
-
-function FilterSection({ filters }) {
+function FilterSection({ filters, dict }) {
+  const options = [
+    { value: "default", label: dict.sortDefault },
+    { value: "high-price", label: dict.sortHighPrice },
+    { value: "low-price", label: dict.sortLowPrice },
+    { value: "max-guests", label: dict.sortMaxGuests },
+    { value: "min-guests", label: dict.sortMinGuests },
+  ];
   const range = { from: filters?.range.split("_")?.at(0), to: filters?.range.split("_")?.at(1) };
   const [startDate, setStartDate] = useState(
     filters?.range && isValid(new Date(range.from)) ? formatRFC7231(new Date(range.from)) : ""
@@ -56,7 +55,7 @@ function FilterSection({ filters }) {
     const departure = formatISO(new Date(endDate), { representation: "date" });
 
     if (!isBefore(arrival, departure)) {
-      toast.error("Invalid date range!");
+      toast.error(dict.invalidDateRange);
       return;
     }
 
@@ -69,7 +68,7 @@ function FilterSection({ filters }) {
   return (
     <form className={`${styles.filterSection} roomsForm`}>
       <div className={styles.formControl}>
-        <label htmlFor="">Sort Rooms</label>
+        <label htmlFor="">{dict.sortRooms}</label>
         <Select
           onChange={(e) => {
             handleSort(e);
@@ -82,7 +81,7 @@ function FilterSection({ filters }) {
       </div>
 
       <div className={styles.formControl}>
-        <label>Filter By Date</label>
+        <label>{dict.filterByDate}</label>
         <div className={styles.datesContainer}>
           <DatePicker
             selected={startDate}
@@ -93,7 +92,7 @@ function FilterSection({ filters }) {
             className={styles.input}
             dateFormat={"dd/MM/yyyy"}
             excludeDateIntervals={[{ start: new Date("01/01/1970"), end: new Date() }]}
-            placeholderText="Arrival Date"
+            placeholderText={dict.arrivalDate}
             // onSelect={(date) => handleStartSelection(date)}
           />
           <DatePicker
@@ -106,7 +105,7 @@ function FilterSection({ filters }) {
             className={styles.input}
             dateFormat={"dd/MM/yyyy"}
             excludeDateIntervals={[{ start: new Date("01/01/1970"), end: new Date() }]}
-            placeholderText="Departure Date"
+            placeholderText={dict.departureDate}
             // onSelect={(date) => handleEndSelection(date)}
           />
 
@@ -114,7 +113,7 @@ function FilterSection({ filters }) {
             <span>
               <FontAwesomeIcon icon={faSearch} />
             </span>
-            <span>Search</span>
+            <span>{dict.search}</span>
           </button>
         </div>
       </div>
