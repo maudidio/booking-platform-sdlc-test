@@ -1,0 +1,89 @@
+{
+  "status": {
+    "sast": "ran",
+    "dependency_audit": "ran (npm)",
+    "licence_check": "ran (npm)"
+  },
+  "findings": [
+    {
+      "stage": "dependency_audit",
+      "class": "vulnerable_dependency",
+      "detail": "@auth/core: new high/critical advisory"
+    },
+    {
+      "stage": "dependency_audit",
+      "class": "vulnerable_dependency",
+      "detail": "@mapbox/node-pre-gyp: new high/critical advisory"
+    },
+    {
+      "stage": "dependency_audit",
+      "class": "vulnerable_dependency",
+      "detail": "axios: new high/critical advisory"
+    },
+    {
+      "stage": "dependency_audit",
+      "class": "vulnerable_dependency",
+      "detail": "brace-expansion: new high/critical advisory"
+    },
+    {
+      "stage": "dependency_audit",
+      "class": "vulnerable_dependency",
+      "detail": "form-data: new high/critical advisory"
+    },
+    {
+      "stage": "dependency_audit",
+      "class": "vulnerable_dependency",
+      "detail": "immutable: new high/critical advisory"
+    },
+    {
+      "stage": "dependency_audit",
+      "class": "vulnerable_dependency",
+      "detail": "jws: new high/critical advisory"
+    },
+    {
+      "stage": "dependency_audit",
+      "class": "vulnerable_dependency",
+      "detail": "minimatch: new high/critical advisory"
+    },
+    {
+      "stage": "dependency_audit",
+      "class": "vulnerable_dependency",
+      "detail": "nanoid: new high/critical advisory"
+    },
+    {
+      "stage": "dependency_audit",
+      "class": "vulnerable_dependency",
+      "detail": "next: new high/critical advisory"
+    },
+    {
+      "stage": "dependency_audit",
+      "class": "vulnerable_dependency",
+      "detail": "next-auth: new high/critical advisory"
+    },
+    {
+      "stage": "dependency_audit",
+      "class": "vulnerable_dependency",
+      "detail": "picomatch: new high/critical advisory"
+    },
+    {
+      "stage": "dependency_audit",
+      "class": "vulnerable_dependency",
+      "detail": "postcss: new high/critical advisory"
+    },
+    {
+      "stage": "dependency_audit",
+      "class": "vulnerable_dependency",
+      "detail": "source-map-js: new high/critical advisory"
+    },
+    {
+      "stage": "dependency_audit",
+      "class": "vulnerable_dependency",
+      "detail": "tar: new high/critical advisory"
+    },
+    {
+      "stage": "dependency_audit",
+      "class": "vulnerable_dependency",
+      "detail": "zod: new high/critical advisory"
+    }
+  ]
+}
