@@ -4,16 +4,15 @@
 APPROVED
 
 ## Summary
-The implementation matches the design. All 13 files in the design table (except the Tester's test file) exist and have content. `setLocaleAction` validates against an allowlist and sets the cookie as specified. `getLocale` validates the cookie and defaults to `en`. `LanguageSelector` is a labelled native select that handles pending and error states and keeps the current locale on failure. `RootLayout`, `Navbar`, `Footer` and the account layout use the dictionary, and the two dictionaries have identical keys. There are no unplanned files and no new dependencies. Runtime check was SKIPPED, so nothing was verified at runtime. The linter did not run and the Next-specific code was not executed, so wiring is verified by reading only. The only client-side call is the server action `setLocaleAction`. It is imported from `app/_lib/actions.js`, which has a file-level "use server". Next's own server receives it through the current page URL, so no separate route is needed. No company guidelines were found (search_restricted returned nothing).
+The implementation matches the design. It adds the i18n module (locales, en/it dictionaries with identical keys, pure getDictionary with fallback, cookie-based getLocale), a validated setLocaleAction (allowlist, cookie options as specified, revalidatePath), a client LanguageSelector (labelled native select, pending state, error handling via role=alert), and wires it into Navbar (outside nav, so it stays visible on mobile), the root layout (html lang), Footer and the account sidebar. Only files in the design scope were changed. The runtime check was SKIPPED, so nothing was verified at runtime. The linter was not run and the Next.js code was never executed (stated in the build summary). The action is invoked as a Next server action through the existing Next server, so there is no separate client fetch or route to verify. No company guidelines apply: search_restricted returned no results.
 
 ## Findings
 | Severity | File | Line / area | Issue | Suggested fix |
 |---|---|---|---|---|
-| minor | app/_lib/i18n/index.js | imports | Uses `.js` extensions, while the sibling `getLocale.js` and `actions.js` import `./locales` without one. `package.json` has no `"type": "module"`, so plain Node needs ESM syntax detection (Node 22.7+ or newer) to load these files in tests. | Tester should confirm the Node version, or import with `.mjs`-compatible setup. |
-| minor | app/_components/Footer/index.jsx | newsletter input | The placeholder `example@mail.com` and the contact details stay untranslated. This is documented as an assumption and the placeholder is not a language string. | None required. |
-| minor | app/_ui/LanguageSelector/index.jsx | catch block | The fallback error "Unable to change language." is hard-coded in English, so it does not follow the selected language. The design asks only for a generic error. | Optionally add a dictionary key. |
-| nit | app/_lib/i18n/dictionaries/*.js | `language.invalid` | The key is defined but never used. The action returns a hard-coded English string. | Use it or remove it. |
-| nit | app/_ui/GuestDropdown | "Sign out" text | The Navbar user dropdown is outside the design table and was not reviewed. Its text may stay in English. | Follow up later. |
+| minor | app/_lib/actions.js | setLocaleAction | The error string "Unsupported language." is hard-coded and duplicates dict.language.invalid, so the two can drift apart. | Optional: reference the shared string. |
+| minor | app/_ui/LanguageSelector/index.jsx | catch block | The fallback "Unable to change language." is English-only, and the server error is also English even when the UI is Italian. The design permits this. | Optional: pass a translated error prop later. |
+| minor | app/_ui/Navbar.jsx | whole file | Some lines are longer than the usual prettier width. Lint and prettier have not been run, so formatting is unverified. | Run the linter and prettier when node_modules is available. |
+| nit | app/_ui/LanguageSelector/index.jsx | catch (err) | The `err` variable is unused. | Use `catch {`. |
 
 ## Checklist
 - [x] Implementation matches the design exactly
@@ -25,22 +24,21 @@ The implementation matches the design. All 13 files in the design table (except 
 - [x] Authentication/authorization is enforced where the design requires it (none required)
 - [x] No string-interpolated database queries (no DB access)
 - [x] No sensitive data in error messages
-- [ ] Code passes xo/prettier (linter not run; Navbar has some long lines, possibly pre-existing)
+- [ ] Code matches the existing style and passes xo/prettier (not verified: linter was not run)
 - [x] Functions are small and single-purpose
 - [x] No dead code or unnecessary complexity
-- [x] Type annotations: not applicable (JS project)
+- [x] Type annotations are present and correct (plain JS repo)
 - [x] New team member could understand this in 6 months
-- [x] Magic numbers/strings are extracted to named constants (the 31536000 cookie max-age is inline, which is acceptable)
+- [x] Magic numbers/strings are extracted to named constants (maxAge 31536000 is inline, acceptable)
 - [x] Error messages are clear and actionable
 - [x] Coder only modified files listed in the design's scope
-- [x] Out-of-scope changes documented (none)
+- [x] Any out-of-scope change is documented (none)
 - [x] Regression risk areas identified
-- [x] No undocumented out-of-scope changes
+- [x] Undocumented out-of-scope changes flagged (none)
 
 ## Regression risk areas
-- app/layout.js: `getLocale()` calls `cookies()`, which makes every page dynamic. Verify pages still render and the `<html lang>` value is correct.
-- app/_lib/actions.js: shared server-action file. Verify the existing actions (auth, booking, contact) still work and `setLocaleAction` rejects "fr", "", null and non-strings with no cookie set.
-- app/_ui/Navbar.jsx: verify the selector is visible on mobile, active-link logic is unchanged, and the user dropdown still works.
-- app/account/layout.jsx and Footer: verify the labels change after switching the language.
-- app/_lib/i18n: the Tester should check that `en` and `it` have identical keys, that `getDictionary` falls back to English for invalid input, and that `isSupportedLocale` handles non-strings and case.
-- package.json: verify `npm test` runs `node --test tests/` and that the Node version can load the ESM `.js` files.
+- app/layout.js: it is now dynamic via cookies() and passes props to Navbar and Footer. Verify that every page still renders and that the `lang` attribute is correct.
+- app/_ui/Navbar.jsx: verify the active-link logic, the GuestDropdown, the mobile toggle, and that the selector is visible on mobile.
+- app/_components/Footer/index.jsx and app/account/layout.jsx: verify that the default English output is unchanged.
+- app/_lib/actions.js: verify that the existing actions are unaffected and that setLocaleAction rejects unsupported, non-string and empty values without changing the cookie.
+- tests/i18n.test.mjs (Tester): cover isSupportedLocale, getDictionary fallback, and key parity between en and it. Check that the `node --test tests/` script works, since index.js uses explicit .js imports.
