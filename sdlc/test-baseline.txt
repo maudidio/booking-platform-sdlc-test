@@ -1,0 +1,281 @@
+le" to /home/maurodidio/ai-native-sdlc/.runs/stack/cde6e050-3392-4a53-b571-7b914c1a7a7a/work/app/package.json.
+# (Use `node --trace-warnings ...` to show where the warning was created)
+# Subtest: AC-1: isSupportedLocale('en') returns true
+ok 1 - AC-1: isSupportedLocale('en') returns true
+  ---
+  duration_ms: 10.572346
+  type: 'test'
+  ...
+# Subtest: AC-1: isSupportedLocale('it') returns true
+ok 2 - AC-1: isSupportedLocale('it') returns true
+  ---
+  duration_ms: 0.996558
+  type: 'test'
+  ...
+# Subtest: AC-1: resolveLocale('it')==='it'
+ok 3 - AC-1: resolveLocale('it')==='it'
+  ---
+  duration_ms: 0.707552
+  type: 'test'
+  ...
+# Subtest: AC-1: resolveLocale('en')==='en'
+ok 4 - AC-1: resolveLocale('en')==='en'
+  ---
+  duration_ms: 1.248718
+  type: 'test'
+  ...
+# Subtest: AC-1: resolveLocale with valid locale 'it' returns 'it'
+ok 5 - AC-1: resolveLocale with valid locale 'it' returns 'it'
+  ---
+  duration_ms: 0.659686
+  type: 'test'
+  ...
+# Subtest: AC-1: resolveLocale with valid locale 'en' returns 'en'
+ok 6 - AC-1: resolveLocale with valid locale 'en' returns 'en'
+  ---
+  duration_ms: 0.578341
+  type: 'test'
+  ...
+# Subtest: AC-1: dictionaries.it.navbar.rooms equals 'Camere'
+ok 7 - AC-1: dictionaries.it.navbar.rooms equals 'Camere'
+  ---
+  duration_ms: 1.33011
+  type: 'test'
+  ...
+# Subtest: AC-1: dictionaries.en.navbar.rooms equals 'Rooms'
+ok 8 - AC-1: dictionaries.en.navbar.rooms equals 'Rooms'
+  ---
+  duration_ms: 0.810911
+  type: 'test'
+  ...
+# Subtest: AC-1: dictionaries.it.navbar.contact equals 'Contattaci'
+ok 9 - AC-1: dictionaries.it.navbar.contact equals 'Contattaci'
+  ---
+  duration_ms: 3.700234
+  type: 'test'
+  ...
+# Subtest: AC-1: dictionaries.en.navbar.contact equals 'Contact Us'
+ok 10 - AC-1: dictionaries.en.navbar.contact equals 'Contact Us'
+  ---
+  duration_ms: 2.014426
+  type: 'test'
+  ...
+# Subtest: AC-1: dictionaries.en.navbar.guestArea equals 'Guest Area'
+ok 11 - AC-1: dictionaries.en.navbar.guestArea equals 'Guest Area'
+  ---
+  duration_ms: 0.758488
+  type: 'test'
+  ...
+# Subtest: AC-1: dictionaries.it.navbar.guestArea equals 'Area ospiti'
+ok 12 - AC-1: dictionaries.it.navbar.guestArea equals 'Area ospiti'
+  ---
+  duration_ms: 0.307016
+  type: 'test'
+  ...
+# Subtest: AC-1: dictionaries.it.navbar.home equals 'Home'
+ok 13 - AC-1: dictionaries.it.navbar.home equals 'Home'
+  ---
+  duration_ms: 0.428315
+  type: 'test'
+  ...
+# Subtest: AC-1: Default locale is English
+ok 14 - AC-1: Default locale is English
+  ---
+  duration_ms: 0.314477
+  type: 'test'
+  ...
+# Subtest: AC-1: Supported locales include both en and it
+ok 15 - AC-1: Supported locales include both en and it
+  ---
+  duration_ms: 6.646448
+  type: 'test'
+  ...
+# Subtest: AC-1: Locale labels are defined for all locales
+ok 16 - AC-1: Locale labels are defined for all locales
+  ---
+  duration_ms: 0.445458
+  type: 'test'
+  ...
+# Subtest: AC-1: Cookie name is 'lang'
+ok 17 - AC-1: Cookie name is 'lang'
+  ---
+  duration_ms: 0.273664
+  type: 'test'
+  ...
+# Subtest: AC-1: Footer dictionaries are defined
+ok 18 - AC-1: Footer dictionaries are defined
+  ---
+  duration_ms: 0.640487
+  type: 'test'
+  ...
+# Subtest: AC-1: Account dictionaries are defined
+ok 19 - AC-1: Account dictionaries are defined
+  ---
+  duration_ms: 0.216923
+  type: 'test'
+  ...
+# Subtest: AC-1: Default language behavior - resolveLocale without valid locale returns 'en'
+ok 20 - AC-1: Default language behavior - resolveLocale without valid locale returns 'en'
+  ---
+  duration_ms: 0.880076
+  type: 'test'
+  ...
+# Subtest: AC-1: Dictionary parity - en and it have identical key structures
+ok 21 - AC-1: Dictionary parity - en and it have identical key structures
+  ---
+  duration_ms: 5.133993
+  type: 'test'
+  ...
+# Subtest: AC-1: All dictionary values are non-empty strings
+ok 22 - AC-1: All dictionary values are non-empty strings
+  ---
+  duration_ms: 1.324725
+  type: 'test'
+  ...
+# Subtest: AC-2: isSupportedLocale('fr') returns false
+ok 23 - AC-2: isSupportedLocale('fr') returns false
+  ---
+  duration_ms: 0.19837
+  type: 'test'
+  ...
+# Subtest: AC-2: isSupportedLocale(undefined) returns false
+ok 24 - AC-2: isSupportedLocale(undefined) returns false
+  ---
+  duration_ms: 0.236881
+  type: 'test'
+  ...
+# Subtest: AC-2: isSupportedLocale(null) returns false
+ok 25 - AC-2: isSupportedLocale(null) returns false
+  ---
+  duration_ms: 0.376706
+  type: 'test'
+  ...
+# Subtest: AC-2: isSupportedLocale(123) returns false
+ok 26 - AC-2: isSupportedLocale(123) returns false
+  ---
+  duration_ms: 0.22719
+  type: 'test'
+  ...
+# Subtest: AC-2: isSupportedLocale('') returns false
+ok 27 - AC-2: isSupportedLocale('') returns false
+  ---
+  duration_ms: 2.523481
+  type: 'test'
+  ...
+# Subtest: AC-2: isSupportedLocale('EN') returns false (case-sensitive)
+ok 28 - AC-2: isSupportedLocale('EN') returns false (case-sensitive)
+  ---
+  duration_ms: 0.303846
+  type: 'test'
+  ...
+# Subtest: AC-2: isSupportedLocale('IT') returns false (case-sensitive)
+ok 29 - AC-2: isSupportedLocale('IT') returns false (case-sensitive)
+  ---
+  duration_ms: 0.56219
+  type: 'test'
+  ...
+# Subtest: AC-2: isSupportedLocale("it; Path=/") returns false
+ok 30 - AC-2: isSupportedLocale("it; Path=/") returns false
+  ---
+  duration_ms: 0.182912
+  type: 'test'
+  ...
+# Subtest: AC-2: resolveLocale('fr') returns 'en' (fallback to default)
+ok 31 - AC-2: resolveLocale('fr') returns 'en' (fallback to default)
+  ---
+  duration_ms: 0.16162
+  type: 'test'
+  ...
+# Subtest: AC-2: resolveLocale(undefined) returns 'en' (fallback to default)
+ok 32 - AC-2: resolveLocale(undefined) returns 'en' (fallback to default)
+  ---
+  duration_ms: 0.226829
+  type: 'test'
+  ...
+# Subtest: AC-2: resolveLocale(null) returns 'en' (fallback to default)
+ok 33 - AC-2: resolveLocale(null) returns 'en' (fallback to default)
+  ---
+  duration_ms: 0.201003
+  type: 'test'
+  ...
+# Subtest: AC-2: resolveLocale('EN') returns 'en' (case-sensitive rejection, fallback)
+ok 34 - AC-2: resolveLocale('EN') returns 'en' (case-sensitive rejection, fallback)
+  ---
+  duration_ms: 0.172939
+  type: 'test'
+  ...
+# Subtest: AC-2: Error message exists for invalid language
+ok 35 - AC-2: Error message exists for invalid language
+  ---
+  duration_ms: 0.221301
+  type: 'test'
+  ...
+# Subtest: AC-2: Error message in Italian for invalid language
+ok 36 - AC-2: Error message in Italian for invalid language
+  ---
+  duration_ms: 0.301857
+  type: 'test'
+  ...
+# Subtest: AC-2: Error message exists for language change failure
+ok 37 - AC-2: Error message exists for language change failure
+  ---
+  duration_ms: 0.300671
+  type: 'test'
+  ...
+# Subtest: AC-2: Error messages differ between languages
+ok 38 - AC-2: Error messages differ between languages
+  ---
+  duration_ms: 0.340899
+  type: 'test'
+  ...
+# Subtest: AC-2: Error messages are non-empty strings
+ok 39 - AC-2: Error messages are non-empty strings
+  ---
+  duration_ms: 0.15128
+  type: 'test'
+  ...
+# Subtest: AC-2: Validation logic prevents unsupported locales
+ok 40 - AC-2: Validation logic prevents unsupported locales
+  ---
+  duration_ms: 0.313892
+  type: 'test'
+  ...
+# Subtest: AC-2: setLanguageAction validation - rejects unsupported locales
+ok 41 - AC-2: setLanguageAction validation - rejects unsupported locales
+  ---
+  duration_ms: 0.222602
+  type: 'test'
+  ...
+# Subtest: AC-2: setLanguageAction validation - accepts supported locales
+ok 42 - AC-2: setLanguageAction validation - accepts supported locales
+  ---
+  duration_ms: 0.399684
+  type: 'test'
+  ...
+# Subtest: AC-1: Default locale is used for fallback
+ok 43 - AC-1: Default locale is used for fallback
+  ---
+  duration_ms: 0.150412
+  type: 'test'
+  ...
+# Subtest: AC-1: Valid locales resolve to themselves
+ok 44 - AC-1: Valid locales resolve to themselves
+  ---
+  duration_ms: 0.230936
+  type: 'test'
+  ...
+# Subtest: AC-1: Invalid locales fallback to default
+ok 45 - AC-1: Invalid locales fallback to default
+  ---
+  duration_ms: 0.267564
+  type: 'test'
+  ...
+1..45
+# tests 45
+# suites 0
+# pass 45
+# fail 0
+# cancelled 0
+# skipped 0
+# todo 0
+# duration_ms 629.636245
